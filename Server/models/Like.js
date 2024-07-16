@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const CommentSchema = new mongoose.Schema(
+const LikeSchema = new mongoose.Schema(
     {
         UserID:{ type:String, unique:true, required:true},
         postID:{ type:String, unique:true, required:true}
@@ -8,4 +8,4 @@ const CommentSchema = new mongoose.Schema(
     {timestamps: true}
 )
 
-module.exports = mongoose.model("Comment", CommentSchema);
+export default mongoose.model("Like", LikeSchema);
