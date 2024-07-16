@@ -30,4 +30,15 @@ router.delete("/:id", Authorization, async(req,res)=>{
     }
 })
 
+// get user
+router.get("/:id", Admin, async(req,res)=>{
+    try {
+        const user = await User.findById(req.params.id)
+        res.status(200).json(user)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+    
+})
+
 export default router
