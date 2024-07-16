@@ -18,7 +18,16 @@ router.put("/:id",Authorization, async (req, res)=>{
             res.status(500).json(error)
         }}
 }
-
-
 )
+
+//Delete
+router.delete("/:id", Authorization, async(req,res)=>{
+    try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(204).json("user deleted successfully")
+    } catch (error) {
+        res.status(400).json(error)
+    }
+})
+
 export default router
