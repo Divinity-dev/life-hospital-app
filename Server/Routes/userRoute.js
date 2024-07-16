@@ -41,4 +41,42 @@ router.get("/:id", Admin, async(req,res)=>{
     
 })
 
+//get users
+router.get("/users", Admin, async(req,res)=>{
+    try {
+        const users = User.find()
+        res.status(200).json(users)
+    } catch (error) {
+      res.status(200).json(error)  
+    }
+})
+
+ // Get stats
+ router.get("/stats",Admin, async (req, res)=>{
+    const date = new Date();
+    const prevyear = new Date(date.setFullYear(date.getFullYear() - 1));
+    console.log(date)
+    try{
+      const data = await User.aggregate([
+        {$match: {createdAt: {$gte: prevyear}}},
+        {
+          $project:{
+            month: { $month: "$createdAt"},
+          }
+        },
+        {
+          $group:
+          {_id: "$month",
+          total: {$sum: 1}}
+        }
+      ])
+      res.status(200).json(data)
+
+    }catch(err){
+      console.log(err)
+      res.status(500).json(err)
+    }
+    
+  })
+
 export default router
