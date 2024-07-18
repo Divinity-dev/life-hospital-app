@@ -1,4 +1,4 @@
-import Post from "../models/Post.js";
+import Comments from "../models/Comments.js";
 import express from "express"
 import { verifytokken, Authorization, Admin } from "../Verify.js"
 
@@ -9,21 +9,21 @@ router.put("/:id",Authorization, async (req, res)=>{
      
         try {
             
-            const updatedpost = await User.findByIdAndUpdate(req.params.id, {
+            const updatedComments = await User.findByIdAndUpdate(req.params.id, {
                 $set:req.body
             }, {new:true})
-          res.status(200).json(updatedpost)
+          res.status(200).json(updatedComments)
         } catch (error) {
             res.status(500).json(error)
         }}
 )
 
 //create
-router.post("/", Admin, async(req,res)=>{
-    const post = new Post(req.body)
+router.post("/", verifytokken, async(req,res)=>{
+    const Comments = new Comments(req.body)
     try {
-        const savedPost = post.save()
-        res.status(200).json(savedPost)
+        const savedComments = Comments.save()
+        res.status(200).json(savedComments)
     } catch (error) {
         res.status(400).json(error)
     }
@@ -32,28 +32,28 @@ router.post("/", Admin, async(req,res)=>{
 //Delete
 router.delete("/:id", Authorization, async(req,res)=>{
     try {
-        await Post.findByIdAndDelete(req.params.id)
-        res.status(204).json("post deleted successfully")
+        await Comments.findByIdAndDelete(req.params.id)
+        res.status(204).json("Comments deleted successfully")
     } catch (error) {
         res.status(400).json(error)
     }
 })
 
-// get post
+// get Comment
 router.get("/:id", Admin, async(req,res)=>{
     try {
-        const post = await Post.findById(req.params.id)
-        res.status(200).json(post)
+        const Comments = await Comments.findById(req.params.id)
+        res.status(200).json(Comments)
     } catch (error) {
         res.status(401).json(error)
     }
     
 })
 
-//get posts
-router.get("/posts", Admin, async(req,res)=>{
+//get Commentss
+router.get("/Comments", async(req,res)=>{
     try {
-        const users = Post.find()
+        const users = Comments.find()
         res.status(200).json(users)
     } catch (error) {
       res.status(200).json(error)  
