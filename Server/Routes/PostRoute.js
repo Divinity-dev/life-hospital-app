@@ -9,11 +9,12 @@ router.put("/:id",Authorization, async (req, res)=>{
      
         try {
             
-            const updatedpost = await User.findByIdAndUpdate(req.params.id, {
+            const updatedpost = await Post.findByIdAndUpdate(req.params.id, {
                 $set:req.body
             }, {new:true})
           res.status(200).json(updatedpost)
         } catch (error) {
+            console.log(error)
             res.status(500).json(error)
         }}
 )
@@ -22,7 +23,7 @@ router.put("/:id",Authorization, async (req, res)=>{
 router.post("/", Admin, async(req,res)=>{
     const post = new Post(req.body)
     try {
-        const savedPost = post.save()
+        const savedPost = await post.save()
         res.status(200).json(savedPost)
     } catch (error) {
         res.status(400).json(error)
