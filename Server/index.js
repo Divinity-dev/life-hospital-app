@@ -22,7 +22,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 app.use("/api/post", PostRoute)
 app.use("/api/post", LikeRoute)
-app.use("/api/Bookings", BookingRouthe)
+app.use("/api/bookings", BookingRouthe)
 
 
 app.listen(3000, ()=>{

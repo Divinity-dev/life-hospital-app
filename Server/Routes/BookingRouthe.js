@@ -3,15 +3,20 @@ import express from "express"
 import { Authorization } from "../Verify.js";
 
 const router = express.Router()
-//create
-router.post('/', Authorization, async (req,res)=>{
-    const booking = new Bookings(req.body)
+
+//get bookings
+router.get("/:id", Authorization, async (req,res)=>{
     try {
-        const savedBooking = await booking.save()
-        res.status(200).json(savedBooking)
+        const booking = await Bookings.findById(req.params.id)
+        if (!booking) {
+            return res.status(404).json({ message: "Booking not found" });
+        }
+        res.status(200).json(booking)
     } catch (error) {
         res.status(400).json(error)
     }
+
+})
 
 //delete
 router.delete('/:id',Authorization, async (req,res)=>{
@@ -23,20 +28,22 @@ router.delete('/:id',Authorization, async (req,res)=>{
     }
 })
 
-//get bookings
-router.get("/:id", Authorization, async (req,res)=>{
+//create
+router.post('/', Authorization, async (req,res)=>{
+    const booking = new Bookings(req.body)
     try {
-        const booking = Bookings.findById(req.params.id)
-        res.status(200).json(booking)
+        const savedBooking = await booking.save()
+        res.status(200).json(savedBooking)
     } catch (error) {
-        res.status(400).json(errorS)
+        res.status(400).json(error)
     }
 
 })
-  //get all bookings
-  router.get('/', Authorization, async(req,res)=>{
+ //get all bookings
+ router.get('/', Authorization, async(req,res)=>{
+    console.log("worked")
     try {
-        const bookings = Bookings.find()
+        const bookings = await Bookings.find()
         res.status(200).json(bookings)
     } catch (error) {
         res.status(400).json(error)
@@ -44,7 +51,5 @@ router.get("/:id", Authorization, async (req,res)=>{
     
 
   })  
-
-})
 
 export default router
