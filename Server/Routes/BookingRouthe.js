@@ -4,7 +4,7 @@ import { Authorization } from "../Verify";
 
 const router = express.Router()
 //create
-router.post('/Bookings', Authorization, async (req,res)=>{
+router.post('/', Authorization, async (req,res)=>{
     const booking = new Bookings(req.body)
     try {
         const savedBooking = await booking.save()
@@ -46,3 +46,5 @@ router.get("/:id", Authorization, async (req,res)=>{
   })  
 
 })
+
+export default router
