@@ -52,10 +52,10 @@ router.get("/:id", Admin, async(req,res)=>{
 })
 
 //get posts
-router.get("/posts", Admin, async(req,res)=>{
+router.get("/", Admin, async(req,res)=>{
     try {
-        const users = Post.find()
-        res.status(200).json(users)
+        const posts = await Post.find()
+        res.status(200).json(posts)
     } catch (error) {
       res.status(200).json(error)  
     }
