@@ -22,7 +22,7 @@ router.put("/:id",verifytokken, async (req, res)=>{
 router.post("/", verifytokken, async(req,res)=>{
     const Like = new Like(req.body)
     try {
-        const savedLike = Like.save()
+        const savedLike = await Like.save()
         res.status(200).json(savedLike)
     } catch (error) {
         res.status(400).json(error)
@@ -53,7 +53,7 @@ router.get("/:id", verifytokken, async(req,res)=>{
 //get Likes
 router.get("/posts", verifytokken, async(req,res)=>{
     try {
-        const users = Post.find()
+        const users = await Post.find()
         res.status(200).json(users)
     } catch (error) {
       res.status(200).json(error)  
