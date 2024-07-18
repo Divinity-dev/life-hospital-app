@@ -1,6 +1,6 @@
-import Bookings from "../models/Bookings";
+import Bookings from "../models/Bookings.js";
 import express from "express"
-import { Authorization } from "../Verify";
+import { Authorization } from "../Verify.js";
 
 const router = express.Router()
 //create
