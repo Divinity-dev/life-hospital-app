@@ -22,7 +22,7 @@ router.put("/:id",Authorization, async (req, res)=>{
 router.post("/", verifytokken, async(req,res)=>{
     const Comments = new Comments(req.body)
     try {
-        const savedComments = Comments.save()
+        const savedComments = await Comments.save()
         res.status(200).json(savedComments)
     } catch (error) {
         res.status(400).json(error)
@@ -53,7 +53,7 @@ router.get("/:id", Admin, async(req,res)=>{
 //get Commentss
 router.get("/Comments", async(req,res)=>{
     try {
-        const users = Comments.find()
+        const users = await Comments.find()
         res.status(200).json(users)
     } catch (error) {
       res.status(200).json(error)  
