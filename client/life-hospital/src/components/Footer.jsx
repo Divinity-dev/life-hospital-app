@@ -1,9 +1,9 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 
 const Footer = () => {
   return (
-    <div className='flex bg-black absolute bottom-0 p-4'>
+    <div className='flex bg-black  p-4'>
       <div className='flex-1 text-white'>
         <h2 className='mb-2'>About</h2>
         <p className='font-sans'>
