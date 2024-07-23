@@ -3,6 +3,7 @@ import { Menu, Close } from '@mui/icons-material';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const login = true;
 
   return (
     <div className='sticky top-0 z-50 h-16'>
@@ -15,8 +16,8 @@ const Navbar = () => {
             <li>Services</li>
             <li>Contact Us</li>
             <li>Blog</li>
-            <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center align-middle ">1</span></li>
-            <li>Login/register</li>
+            <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">1</span></li>
+            <li>{login? "signout":"Login/register"}</li>
           </ul>
           {/* Mobile Menu Toggle */}
           <div className='md:hidden'>
