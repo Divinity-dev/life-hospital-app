@@ -5,8 +5,8 @@ const Navbar = () => {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div>
-      <div className='flex justify-between p-4 bg-black text-white sticky top-0 z-50'>
+    <div className='sticky top-0 z-50 h-16'>
+      <div className='flex justify-between p-4 bg-green-800 text-white '>
         <h2>Logo</h2>
         <nav className='flex items-center'>
           {/* Desktop Menu */}
@@ -15,8 +15,8 @@ const Navbar = () => {
             <li>Services</li>
             <li>Contact Us</li>
             <li>Blog</li>
-            <li>Bookings<span className="ml-1">(1)</span></li>
-            <li>Login</li>
+            <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center align-middle ">1</span></li>
+            <li>Login/register</li>
           </ul>
           {/* Mobile Menu Toggle */}
           <div className='md:hidden'>
@@ -37,7 +37,7 @@ const Navbar = () => {
             <li onClick={() => setToggle(false)}>Contact Us</li>
             <li onClick={() => setToggle(false)}>Blog</li>
             <li onClick={() => setToggle(false)}>Bookings<span className="ml-1">(1)</span></li>
-            <li onClick={() => setToggle(false)}>Login</li>
+            <li onClick={() => setToggle(false)}>Login/register</li>
           </ul>
         </div>
       )}

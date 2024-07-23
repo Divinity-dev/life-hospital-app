@@ -31,7 +31,7 @@ const Landing = () => {
       <div className='flex flex-col md:flex-row'>
         <div className='flex flex-1 flex-col justify-start p-4 bg-blue-700 text-white'>
           <h2 className='text-3xl mb-6'>Loving and caring staff</h2>
-          <p className='mb-6'>
+          <p className='mb-6 italic'>
             We pride ourselves with nurses and doctors that truly care
             about your wellbeing. Find out more about our services.
             Book an appointment with us today.
@@ -40,7 +40,7 @@ const Landing = () => {
         </div>
         <div className='flex flex-1 flex-col justify-start p-4  bg-blue-600 text-white'>
           <h2 className='text-3xl mb-6'>Best price guarantee</h2>
-          <p className='mb-6'>
+          <p className='mb-6 italic'>
            With various payment options, life hospital makes sure you get the 
            best care at affordable price. We prioritize your health.
           </p>
@@ -48,7 +48,7 @@ const Landing = () => {
         </div>
         <div className='flex flex-1 flex-col justify-start p-4  bg-blue-950 text-white'>
           <h2 className='text-3xl mb-6'>Oppening hours</h2>
-          <p className='mb-11'>
+          <p className='mb-11 italic'>
             Monday-Friday: 08:00am-06:00pm
             Saturday: 08:00am-04:00pm
             Sunday: 08:00am-04:00pm
