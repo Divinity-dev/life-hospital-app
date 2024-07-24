@@ -1,17 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { doctors } from './Doctors'
-import {ArrowBack, ArrowForward} from "@mui/icons-material"
+
 
 const Landing = () => {
 
   const [index, setIndex]= useState(0)
-  const handleClick =(name)=>{
-    if (name === "back") {
-      setIndex(index === 0 ? doctors.length - 1 : index - 1)
-    } else {
-      setIndex(index === doctors.length - 1 ? 0 : index + 1)
-    }
-  }
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        if(index<(doctors.length-1)){
+          setIndex(index+1)
+        }else{
+          setIndex(0)
+        };
+      }, 3000);
+  
+      return () => clearTimeout(timer);
+    }, [index, doctors.length]);
+   
+  
+
 
   return (
     <div>
@@ -25,8 +32,6 @@ const Landing = () => {
           <button className='flex justify-left p-2 border-2 border-black w-30 text-xl mt-10'>Book now</button>
           
         </div>
-        <ArrowBack onClick={()=>{handleClick("back")}} name="back" className='absolute left-4 top-1/2 transform -translate-y-1/2 cursor-pointer'/>
-        <ArrowForward onClick={()=>{handleClick("forward")}} name="forward"className='absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer' />
       </div>
       <div className='flex flex-col md:flex-row'>
         <div className='flex flex-1 flex-col justify-start p-4 bg-blue-700 text-white'>
