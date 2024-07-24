@@ -26,8 +26,8 @@ const Staff = () => {
         </div>
       </div>
       <div className='w-full flex flex-col justify-center items-center bg-[url(https://img.freepik.com/free-photo/health-still-life-with-copy-space_23-2148854034.jpg?t=st=1721809035~exp=1721812635~hmac=2bf7f91574c72d415705fcd241c0d5ea8976f072d81a2f79b694f9afa2aae6e3&w=1060)] object-cover  bg-cover bg-center bg-no-repeat bg-blend-overlay  from-black/100 to-black/100'>
-        <h1 className='text-7xl text-blue-800 mb-6'>Life Hospital Library</h1>
-        <h2 className='italic font-bold w-1/3 mb-6 text-center'>View and download uplifting materials from our library.
+        <h1 className='text-7xl text-blue-800 mb-6'>Life Hospital Blog</h1>
+        <h2 className='italic font-bold w-1/3 mb-6 text-center'>View and download uplifting materials from our blog.
         What are you waiting for?</h2>
         <button className='border-1 bg-glx w-200 rounded-full p-2 mb-6'>Visit our blog now</button>
       </div>
