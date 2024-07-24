@@ -13,6 +13,9 @@ module.exports = {
        backgroundColor: {
            bgx: "#f5fafd"
        },
+       colors:{
+        glx:"#57b5b2"
+       },
        fontSize: {
         50: "50px",
         30: "30px",
@@ -20,7 +23,8 @@ module.exports = {
         15:"15"
        },
        width: {
-        30: "120px"
+        30: "120px",
+        200:"200px"
        },
        height: {
         '80vh': '80vh',

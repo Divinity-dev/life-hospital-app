@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Landing from './components/Landing';
 import Services from './components/Services';
+import Staff from './components/Staff';
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
      <Navbar/>
      <Landing/>
      <Services/>
+     <Staff/>
      <Footer/>
      
     </div>

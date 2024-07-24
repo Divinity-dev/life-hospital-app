@@ -6,7 +6,7 @@ const Footer = () => {
     <div className='flex bg-black  p-4'>
       <div className='flex-1 text-white'>
         <h2 className='mb-2'>About</h2>
-        <p className='font-sans'>
+        <p className='italic'>
         Life Medical is a specialist missionary hospital, birthed under the inspiration of the Holy Spirit, to synergize excellent medical practice 
         with faith in the word of God to bring life, and wholesomeness to the sick and broken hearted.
         </p>
