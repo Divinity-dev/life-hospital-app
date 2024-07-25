@@ -21,7 +21,7 @@ app.use(express.json())
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 app.use("/api/post", PostRoute)
-app.use("/api/post", LikeRoute)
+app.use("/api/like", LikeRoute)
 app.use("/api/bookings", BookingRouthe)
 
 

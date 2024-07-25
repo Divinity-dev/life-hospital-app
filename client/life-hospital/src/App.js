@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './store';
+import { store, persistor } from './redux/store.js';
 
 function App() {
   const location = useLocation();
