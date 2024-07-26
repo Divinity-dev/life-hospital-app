@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { doctors } from './Doctors'
+import { Link } from 'react-router-dom'
 
 
 const Landing = () => {
@@ -29,8 +30,9 @@ const Landing = () => {
           <p className='mb-16 text-30'>
           {doctors[index].desc}
           </p>
+          <Link to={'./booking'}>
           <button className='flex justify-left p-2 border-2 border-black w-30 text-xl mt-10'>Book now</button>
-          
+          </Link>
         </div>
       </div>
       <div className='flex flex-col md:flex-row'>
@@ -41,7 +43,9 @@ const Landing = () => {
             about your wellbeing. Find out more about our services.
             Book an appointment with us today.
           </p>
+          <Link to={'./booking'}>
           <button className='border-spacing-1 bg-green-400 p-2 w-60 rounded-3xl'>Book an appointment</button>
+          </Link>
         </div>
         <div className='flex flex-1 flex-col justify-start p-4  bg-blue-600 text-white'>
           <h2 className='text-3xl mb-6'>Best price guarantee</h2>
@@ -49,7 +53,9 @@ const Landing = () => {
            With various payment options, life hospital makes sure you get the 
            best care at affordable price. We prioritize your health.
           </p>
+          <Link to={'./booking'}>
           <button className='border-spacing-1 bg-green-400 p-2 w-60 rounded-3xl'>Book an appointment</button>
+          </Link>
         </div>
         <div className='flex flex-1 flex-col justify-start p-4  bg-blue-950 text-white'>
           <h2 className='text-3xl mb-6'>Oppening hours</h2>
@@ -58,7 +64,9 @@ const Landing = () => {
             Saturday: 08:00am-04:00pm
             Sunday: 08:00am-04:00pm
           </p>
+          <Link to={'./booking'}>
           <button className='border-spacing-1 bg-green-400 p-2 w-60 rounded-3xl'>Book an appointment</button>
+          </Link>
         </div>
       </div>
     </div>

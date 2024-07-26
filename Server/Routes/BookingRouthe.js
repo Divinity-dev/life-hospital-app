@@ -35,13 +35,13 @@ router.post('/', Authorization, async (req,res)=>{
         const savedBooking = await booking.save()
         res.status(200).json(savedBooking)
     } catch (error) {
+        console.log(error)
         res.status(400).json(error)
     }
 
 })
  //get all bookings
  router.get('/', Authorization, async(req,res)=>{
-    console.log("worked")
     try {
         const bookings = await Bookings.find()
         res.status(200).json(bookings)

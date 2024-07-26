@@ -3,15 +3,15 @@ import nodemon from "nodemon";
 
 const BookingSchema = new mongoose.Schema(
     {
-        Fisrtname:{type:String, unique:true, required:true},
-        Lastname:{type:String, unique:true, required:true},
+        Firstname:{type:String,  required:true},
+        Lastname:{type:String,  required:true},
         Gender:{type:String},
         Date:{type:Date},
+        Time:{type:String},
         Phone:{type:String},
-        Email:{type:String, required:true, unique:true},
+        Email:{type:String, required:true},
         purpose:{type:String},
         Details:{type:String},
-       Image:{type:String}
     },
     {timestamps: true}
 )

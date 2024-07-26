@@ -19,13 +19,12 @@ const handleSubmit = async (e)=>{
  e.preventDefault()
  try {
   const res = await axios.post("http://localhost:3000/api/auth/login",user)
-  console.log(res.data)
+ 
   dispatch(loginSuccess(res.data))
  } catch (error) {
   dispatch(loginfailure(error))
  }
 }
-
 
   return (
     <div className='flex justify-center items-center bg-[url(https://img.freepik.com/free-photo/health-still-life-with-copy-space_23-2148854034.jpg?t=st=1721809035~exp=1721812635~hmac=2bf7f91574c72d415705fcd241c0d5ea8976f072d81a2f79b694f9afa2aae6e3&w=1060)] object-cover  bg-cover bg-center bg-no-repeat bg-blend-overlay  from-black/100 to-black/100 '>
