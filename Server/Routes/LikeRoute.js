@@ -20,9 +20,9 @@ router.put("/:id",verifytokken, async (req, res)=>{
 
 //create
 router.post("/", verifytokken, async(req,res)=>{
-    const Like = new Like(req.body)
+    const like = new Like(req.body)
     try {
-        const savedLike = await Like.save()
+        const savedLike = await like.save()
         res.status(200).json(savedLike)
     } catch (error) {
         res.status(400).json(error)

@@ -41,7 +41,7 @@ router.delete("/:id", Authorization, async(req,res)=>{
 })
 
 // get post
-router.get("/:id", Admin, async(req,res)=>{
+router.get("/:id", async(req,res)=>{
     try {
         const post = await Post.findById(req.params.id)
         res.status(200).json(post)
@@ -52,7 +52,7 @@ router.get("/:id", Admin, async(req,res)=>{
 })
 
 //get posts
-router.get("/", Admin, async(req,res)=>{
+router.get("/", async(req,res)=>{
     try {
         const posts = await Post.find()
         res.status(200).json(posts)

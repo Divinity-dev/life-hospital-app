@@ -7,6 +7,7 @@ import userRoute from "./Routes/userRoute.js"
 import PostRoute from "./Routes/PostRoute.js"
 import LikeRoute from "./Routes/LikeRoute.js"
 import BookingRouthe from "./Routes/BookingRouthe.js"
+import Comments from "./Routes/Comments.js"
 
 dotenv.config()
 mongoose.connect(process.env.Mongo_url).then(()=>{
@@ -23,6 +24,7 @@ app.use("/api/user", userRoute)
 app.use("/api/post", PostRoute)
 app.use("/api/like", LikeRoute)
 app.use("/api/bookings", BookingRouthe)
+app.use("/api/comment", Comments)
 
 
 app.listen(3000, ()=>{
