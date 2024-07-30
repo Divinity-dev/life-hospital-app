@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './redux/store.js';
 import Booking from './pages/Booking.jsx';
+import Blogposts from './pages/Blogposts.jsx';
 
 function App() {
   const location = useLocation();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/booking" element={< Booking/>}/>
+        <Route path="/blogpost" element={< Blogposts/>}/>
       </Routes>
       {!isLoginPage && !isregisterPage && <Footer />}
       </PersistGate>
