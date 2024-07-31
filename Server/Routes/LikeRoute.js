@@ -42,9 +42,10 @@ router.delete("/:id", verifytokken, async(req,res)=>{
 // get Like
 router.get("/:id", verifytokken, async(req,res)=>{
     try {
-        const Like = await Like.findById(req.params.id)
-        res.status(200).json(Like)
+        const like = await Like.find({postID:req.params.id})
+        res.status(200).json(like)
     } catch (error) {
+        console.log(error)
         res.status(401).json(error)
     }
     

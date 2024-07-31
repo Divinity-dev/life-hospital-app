@@ -2,29 +2,104 @@ import React, { useEffect, useState } from 'react'
 import {ThumbUpOffAlt, ThumbUpAlt, Comment} from "@mui/icons-material"
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Blog = () => {
     const [post, setPost] = useState({})
+    const [postLikes, setpostLikes]=useState([])
     const [comment, setComment] = useState(false)
+    const [comments, setComments] = useState([])
+    const [inputcomments, setinputComments] = useState([])
     const [like, setLike] = useState(false)
+    const [likes, setLikes] = useState([])
+    const [createLike, setCreateLike]= useState({})
     const handlecomment = ()=>{
         setComment(comment? false:true)
     }
 
-    const handleLikes = ()=>{
-        setLike(like? false:true)
+    const Admin = useSelector(state=>state.user.currentUser.user.isAdmin)
+    const id = useParams()
+
+const user = useSelector(state=>state.user.currentUser.accessToken)
+const UserID = useSelector(state=>state.user.currentUser.user._id)
+    const config = {
+        headers:{
+            Authorization:`Bearer ${user}`
+        }
     }
-
-
-const id = useParams()
-
 useEffect(()=>{
-    const getPost = async ()=>{
-        const res = await axios.get(`http://localhost:3000/api/post/${id.ID}`)
-        setPost(res.data)
+    const getLikes = async ()=>{
+        try {
+            const res = await axios.get(`http://localhost:3000/api/like/${id.ID}`,config)
+            console.log(res.data)
+            setpostLikes(res.data)
+        } catch (error) {
+            console.log(error)
+        }
+
     }
-    getPost()
-    },[id.ID])
+    getLikes()
+},[id.ID])
+
+
+    const handleLikes = async (name)=>{
+        setLike(like? false:true)
+        if(name==="addLike"){
+            try {
+                const res = await axios.post("http://localhost:3000/api/like",{UserID, postID:id.ID},config)
+            console.log(res.data)
+            setCreateLike(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+            
+        }else{
+
+            try {
+                const res = await axios.delete(`http://localhost:3000/api/like/${createLike._id}`,config)
+                console.log(res.data)
+                setCreateLike({})
+            } catch (error) {
+                console.log(error)
+            }
+          
+        }
+    }
+
+    useEffect(()=>{
+        const getPost = async ()=>{
+            try {
+                const res = await axios.get(`http://localhost:3000/api/post/${id.ID}`)
+                setPost(res.data)
+            } catch (error) {
+                console.log(error)
+            }
+           
+        }
+        getPost()
+        },[id.ID])
+    useEffect(()=>{
+        const getComments = async ()=>{
+            try {
+                const res = await axios.get(`http://localhost:3000/api/comment/${id.ID}`,config)
+                setComments(res.data)
+               
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getComments()
+    },[id.ID,config])
+
+    const handleclick = async (e)=>{
+       e.preventDefault()
+       try {
+        const res = await axios.post("http://localhost:3000/api/comment", {UserID, postID:id.ID, comment:inputcomments}, config)
+       } catch (error) {
+        console.log(error)
+       }
+    }
+    
 
   return (
     
@@ -33,14 +108,22 @@ useEffect(()=>{
       <h2 className='text-2xl font-bold text-center mb-2'>{post.Title}</h2>
       <p className='italic mb-4'>{post.Body}</p>
       <div className='flex'>
-        <span>5</span>{like? <ThumbUpAlt onClick={handleLikes}/> :<ThumbUpOffAlt onClick={handleLikes}/>}
+        <span>{postLikes.length}</span>{like? <ThumbUpAlt onClick={()=>handleLikes("deleteLike")}/> :<ThumbUpOffAlt onClick={()=>handleLikes("addLike")}/>}
         <div className='ml-4'>
-        <span>5</span><Comment onClick={handlecomment}/>
+        <span>{comments.length}</span><Comment onClick={handlecomment}/>
         </div>
         
       </div>
-      {comment && <input type="text" placeholder='Leave a comment.' className='w-1/2 h-40 rounded-sm border-2 p-2'/>}
-         
+      {comment && <input onChange={(e)=>setinputComments(e.target.value)} type="text" placeholder='Leave a comment.' className='w-1/2 h-10 rounded-sm border-2 p-2'/> 
+      }
+      {
+        comment && <button onClick={handleclick} className='w-40 rounded-full p-2 bg-green-500 mt-4'>submit</button>
+      }
+      <div className={Admin? "block":"hidden"}>
+           {comments?.map((Comment)=>(
+            <h2>{Comment.comment}</h2>
+           ))}
+      </div>
       </div>
      
     

@@ -25,7 +25,7 @@ router.post("/", verifytokken, async(req,res)=>{
         const savedComments = await Comments.save()
         res.status(200).json(savedComments)
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json(error) 
     }
 })
 
@@ -42,8 +42,12 @@ router.delete("/:id", Authorization, async(req,res)=>{
 // get Comment
 router.get("/:id", Admin, async(req,res)=>{
     try {
-        const Comments = await Comment.findById(req.params.id)
-        res.status(200).json(Comments)
+        const Comments = await Comment.find({postID:req.params.id})
+        if (!Comments) {
+            return res.status(404).json({ message: "Comment not found" });
+        }
+
+        res.status(200).json(Comments);
     } catch (error) {
         res.status(401).json(error)
     }
@@ -51,7 +55,7 @@ router.get("/:id", Admin, async(req,res)=>{
 })
 
 //get Commentss
-router.get("/Comments", async(req,res)=>{
+router.get("/", async(req,res)=>{
     try {
         const users = await Comment.find()
         res.status(200).json(users)

@@ -22,7 +22,7 @@ const Navbar = () => {
             <Link>
             <li>Contact Us</li>
             </Link>
-           <Link>
+           <Link to={'/blogposts'}>
             <li>Blog</li>
             </Link>
             <Link to={'./booking'}>
@@ -55,7 +55,7 @@ const Navbar = () => {
             <Link>
             <li onClick={() => setToggle(false)}>Contact Us</li>
             </Link>
-            <Link>
+            <Link to={'/blogposts'}>
             <li onClick={() => setToggle(false)}>Blog</li>
             </Link>
             <Link to={'./booking'}>
