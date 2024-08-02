@@ -16,7 +16,7 @@ const Navbar = () => {
             <Link to={'./'}>
             <li>Home</li>
             </Link>
-            <Link>
+            <Link to={'/about'}>
             <li>Services</li>
             </Link>
             <Link>
@@ -49,7 +49,7 @@ const Navbar = () => {
             <Link to={'./'}>
             <li onClick={() => setToggle(false)}>Home</li>
             </Link>
-            <Link>
+            <Link to={'/about'}>
             <li onClick={() => setToggle(false)}>Services</li>
             </Link>
             <Link>

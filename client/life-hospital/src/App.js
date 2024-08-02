@@ -13,6 +13,7 @@ import { store, persistor } from './redux/store.js';
 import Booking from './pages/Booking.jsx';
 import Blogposts from './pages/Blogposts.jsx';
 import Blog from './pages/Blog.jsx';
+import  About from "./pages/About.jsx"
 
 function App() {
   const location = useLocation();
@@ -32,6 +33,7 @@ function App() {
         <Route path="/booking" element={< Booking/>}/>
         <Route path="/blogposts" element={< Blogposts/>}/>
         <Route path="/blogpost/:ID" element={< Blog/>}/>
+        <Route path="/about" element={<About/>}/>
       </Routes>
       {!isLoginPage && !isregisterPage && <Footer />}
       </PersistGate>
