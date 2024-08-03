@@ -14,6 +14,7 @@ import Booking from './pages/Booking.jsx';
 import Blogposts from './pages/Blogposts.jsx';
 import Blog from './pages/Blog.jsx';
 import  About from "./pages/About.jsx"
+import Dashboard from './pages/Dashboard.jsx';
 
 function App() {
   const location = useLocation();
@@ -34,6 +35,7 @@ function App() {
         <Route path="/blogposts" element={< Blogposts/>}/>
         <Route path="/blogpost/:ID" element={< Blog/>}/>
         <Route path="/about" element={<About/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
       {!isLoginPage && !isregisterPage && <Footer />}
       </PersistGate>

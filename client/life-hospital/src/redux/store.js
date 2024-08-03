@@ -20,13 +20,13 @@ const bookingPersistor = {
 
 const persistedUserReducer = persistReducer(userPersistor, userReducer);
 const persistedLikeReducer = persistReducer(likePersistor, likeReducer);
-const persistedBookingReducer = persistReducer(bookingPersistor, likeReducer);
+const persistedBookingReducer = persistReducer(bookingPersistor, bookingReducer );
 
 export const store = configureStore({
     reducer: {
       user: persistedUserReducer,
       like:persistedLikeReducer,
-      bokking:persistedBookingReducer
+      booking:persistedBookingReducer
     },
     
   });

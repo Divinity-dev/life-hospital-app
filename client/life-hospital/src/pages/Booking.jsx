@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { addBooking } from '../redux/bookingSlice'
+import { useDispatch } from 'react-redux'
 
 const Booking = () => {
 const [details, setDetails] = useState({})
@@ -8,6 +10,7 @@ const [Gender, setGender] = useState("")
 const [purpose, setPurpose] = useState("")
 
 const authToken = useSelector(state=>state.user.currentUser?.accessToken)
+const dispatch = useDispatch()
 const config = {
     headers:{
       Authorization:`Bearer ${authToken}`
@@ -33,7 +36,7 @@ const formattedDetails = {
 
 try {
     const res = await axios.post("http://localhost:3000/api/bookings",formattedDetails, config)
-    console.log(res.data)
+   dispatch(addBooking(res.data))
 } catch (error) {
     console.log(error)
     
