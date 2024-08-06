@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import { Menu, Close } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import {logout} from "../redux/userSlice"
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const login = true;
   const booking = useSelector(state=>state.booking.Appointment)
+  const dispatch = useDispatch()
+
+  const logOut = ()=>{
+  dispatch(logout())
+  }
 
   return (
     <div className='sticky top-0 z-50 h-16'>
@@ -31,7 +37,7 @@ const Navbar = () => {
             <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">{booking.length}</span></li>
             </Link>
             <Link to={'./login'}>
-            <li>{login? "signout":"Login/register"}</li>
+            {login? <li onClick={()=>{logOut()}}>signout</li> : <li>login</li>}
             </Link>
           </ul>
           {/* Mobile Menu Toggle */}
@@ -64,7 +70,7 @@ const Navbar = () => {
             <li onClick={() => setToggle(false)}>Bookings<span className="ml-1">{booking.length}</span></li>
             </Link>
             <Link to={'./login'}>
-            <li onClick={() => setToggle(false)}>{login? "signout":"Login/register"}</li>
+            <li onClick={() => setToggle(false)} >{login? "signout":"Login/register"}</li>
             </Link>
           </ul>
         </div>

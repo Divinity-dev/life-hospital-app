@@ -7,25 +7,28 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './redux/store.js';
+import {  useSelector } from 'react-redux';
 import Booking from './pages/Booking.jsx';
 import Blogposts from './pages/Blogposts.jsx';
 import Blog from './pages/Blog.jsx';
 import  About from "./pages/About.jsx"
 import Dashboard from './pages/Dashboard.jsx';
+import Postupdate from './pages/Postupdate.jsx';
 
 function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === '/login';
   const isregisterPage = location.pathname === '/register';
+  const currentUser = useSelector(state => state.user.currentUser);
+  const Admin = currentUser?.user?.isAdmin || false;
+  
+  
+  
 
   return (
     
     <div className="">
-      <Provider store={store}>
-        <PersistGate persistor={persistor} loading={null}>
+      
       {!isLoginPage && !isregisterPage && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
@@ -36,10 +39,10 @@ function App() {
         <Route path="/blogpost/:ID" element={< Blog/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
+        {Admin && <Route path="/postupdate" element={<Postupdate/>}/>}
       </Routes>
       {!isLoginPage && !isregisterPage && <Footer />}
-      </PersistGate>
-      </Provider>
+      
     </div>
   );
 }

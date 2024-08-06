@@ -36,6 +36,8 @@ router.post("/login", async(req,res)=>{
                  process.env.jwt_key,
                 {"expiresIn":"3D"})
             res.status(200).json({user, accessToken});
+           
+
         } else {
             res.status(401).json({ error: 'Incorrect password' });
         }
