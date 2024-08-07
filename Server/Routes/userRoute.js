@@ -5,9 +5,12 @@ import CryptoJS from "crypto-js"
 
 const router = express.Router()
 
+
+
 router.put("/:id",Authorization, async (req, res)=>{
     if(req.body.password){
-        req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.crypto_key).toString() 
+        req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.crypto_key).toString()
+       }
         try {
             
             const updateduser = await User.findByIdAndUpdate(req.params.id, {
@@ -17,7 +20,6 @@ router.put("/:id",Authorization, async (req, res)=>{
         } catch (error) {
             res.status(500).json(error)
         }}
-}
 )
 
 //Delete
@@ -28,6 +30,16 @@ router.delete("/:id", Authorization, async(req,res)=>{
     } catch (error) {
         res.status(400).json(error)
     }
+})
+
+//get users
+router.get("/users", Admin, async(req,res)=>{
+  try {
+      const users =await User.find()
+      res.status(200).json(users)
+  } catch (error) {
+    res.status(200).json(error)  
+  }
 })
 
 // get user
@@ -41,15 +53,7 @@ router.get("/:id", Admin, async(req,res)=>{
     
 })
 
-//get users
-router.get("/users", Admin, async(req,res)=>{
-    try {
-        const users = User.find()
-        res.status(200).json(users)
-    } catch (error) {
-      res.status(200).json(error)  
-    }
-})
+
 
  // Get stats
  router.get("/stats",Admin, async (req, res)=>{

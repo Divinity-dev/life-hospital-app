@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate  } from 'react-router-dom'
 import { loginSuccess, loginfailure, loginStart } from '../redux/userSlice'
 import { useDispatch } from 'react-redux'
 import axios from "axios"
@@ -7,6 +7,7 @@ import axios from "axios"
 
 const Login = () => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
  const [user, setUser] = useState({})
  const handlechange = (e)=>{
   const value = e.target.value
@@ -21,6 +22,7 @@ const handleSubmit = async (e)=>{
   const res = await axios.post("http://localhost:3000/api/auth/login",user)
  
   dispatch(loginSuccess(res.data))
+  navigate("/")
  } catch (error) {
   dispatch(loginfailure(error))
  }

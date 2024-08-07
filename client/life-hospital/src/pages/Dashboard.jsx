@@ -1,14 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { removebooking } from '../redux/bookingSlice'
 import { useDispatch } from 'react-redux'
 
 const Dashboard = () => {
+    const [Image,setImage]=useState('')
     const bookings = useSelector(state=>state.booking.Appointment)
     const user = useSelector(state=>state.user.currentUser.user.username)
     const token = useSelector(state=>state.user.currentUser?.accessToken)
     const dispatch = useDispatch()
+    const id =useSelector(state=>state.user.currentUser.user._id)
+    const handleImage = (e)=>{
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataURL = reader.result; 
+          setImage(dataURL);    
+        };
+        reader.readAsDataURL(file);
+      }
     const config ={
         headers:{
             Authorization:`Bearer ${token}`
@@ -22,6 +33,16 @@ const Dashboard = () => {
         console.log(error)
     }
    }
+   const handleSubmit= async (e)=>{
+    e.preventDefault()
+       try {
+        const res = await axios.put(`http://localhost:3000/api/user/${id}`,{Image},config)
+        console.log(res.data)
+        
+       } catch (error) {
+        console.log(error)
+       }
+   }
 
   return (
     <div>
@@ -30,8 +51,8 @@ const Dashboard = () => {
         welcome @{user}, you can add a picture to your profile here...
       </p>
       <div className='flex mb-4'>
-      <input type="file" className=' mr-2'/>
-      <button className='bg-gray-500 p-1 border-l-black rounded-xl w-32 '>upload</button>
+      <input type="file" className=' mr-2' onChange={handleImage}/>
+      <button type="button" className='bg-gray-500 p-1 border-l-black rounded-xl w-32 ' onClick={handleSubmit}>upload</button>
       </div>
        </div>
        {

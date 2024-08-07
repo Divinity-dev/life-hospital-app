@@ -23,8 +23,6 @@ setDetails({...details,
 )
 }
 
-console.log(details,purpose)
-
 const handleSubmit = async (e)=>{
 e.preventDefault()
 const formattedDetails = {

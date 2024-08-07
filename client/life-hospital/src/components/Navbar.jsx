@@ -6,12 +6,14 @@ import {logout} from "../redux/userSlice"
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const login = true;
+  const login = useSelector(state=>state.user.currentUser)
+  const Admin = useSelector(state=>state.user.currentUser.user.isAdmin)
   const booking = useSelector(state=>state.booking.Appointment)
   const dispatch = useDispatch()
 
   const logOut = ()=>{
   dispatch(logout())
+  setToggle(false)
   }
 
   return (
@@ -24,6 +26,9 @@ const Navbar = () => {
             <Link to={'./'}>
             <li>Home</li>
             </Link>
+            {Admin && <Link to={'/postupdate'}>
+            <li>Admin</li>
+            </Link>}
             <Link to={'/about'}>
             <li>Services</li>
             </Link>
@@ -36,9 +41,9 @@ const Navbar = () => {
             <Link to={'./booking'}>
             <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">{booking.length}</span></li>
             </Link>
-            <Link to={'./login'}>
-            {login? <li onClick={()=>{logOut()}}>signout</li> : <li>login</li>}
-            </Link>
+            
+           {login? <li onClick={()=>{logOut()}} className='cursor-pointer'>signout</li> :<Link to={'./login'}> <li>login</li></Link>}
+            
           </ul>
           {/* Mobile Menu Toggle */}
           <div className='md:hidden'>
@@ -57,6 +62,9 @@ const Navbar = () => {
             <Link to={'./'}>
             <li onClick={() => setToggle(false)}>Home</li>
             </Link>
+            {Admin && (<Link to={'/postupdate'}>
+            <li onClick={() => setToggle(false)} >Admin</li>
+            </Link>)}
             <Link to={'/about'}>
             <li onClick={() => setToggle(false)}>Services</li>
             </Link>
@@ -70,7 +78,7 @@ const Navbar = () => {
             <li onClick={() => setToggle(false)}>Bookings<span className="ml-1">{booking.length}</span></li>
             </Link>
             <Link to={'./login'}>
-            <li onClick={() => setToggle(false)} >{login? "signout":"Login/register"}</li>
+            <li onClick={logOut } >{login? "signout":"Login/register"}</li>
             </Link>
           </ul>
         </div>
