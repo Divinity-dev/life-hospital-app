@@ -15,6 +15,7 @@ import  About from "./pages/About.jsx"
 import Dashboard from './pages/Dashboard.jsx';
 import Postupdate from './pages/Postupdate.jsx';
 import Users from './pages/Users.jsx';
+import Postlist from './pages/Postlist.jsx';
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}/>
         {Admin && <Route path="/postupdate" element={<Postupdate/>}/>}
         {Admin && <Route path="/users" element={<Users/>}/>}
+        {Admin && <Route path="/postlist" element={<Postlist/>}/>}
       </Routes>
       {!isLoginPage && !isregisterPage && <Footer />}
       

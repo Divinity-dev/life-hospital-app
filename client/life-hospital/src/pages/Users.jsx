@@ -50,7 +50,8 @@ const columns = [
   { field: 'user', headerName: 'username', renderCell: (params)=>{
     return( 
         <div className='flex'>
-    <img className='w-10 h-10 object-cover' src="https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png" alt="" />
+    <img className='w-10 h-10 object-cover rounded-full' src={
+     params.row.Image || "https://e7.pngegg.com/pngimages/84/165/png-clipart-united-states-avatar-organization-information-user-avatar-service-computer-wallpaper-thumbnail.png"} alt={params.row.username} />
     {params.row.username}
     </div>
     ) 
@@ -86,17 +87,7 @@ const columns = [
  
 ];
 
-const rows = [
-  { id: 1, lastName: 'Snow', Email: 'Jon', age: 35 },
-  { id: 2, lastName: 'Lannister', Email: 'Cersei', age: 42 },
-  { id: 3, lastName: 'Lannister', Email: 'Jaime', age: 45 },
-  { id: 4, lastName: 'Stark', Email: 'Arya', age: 16 },
-  { id: 5, lastName: 'Targaryen', Email: 'Daenerys', age: null },
-  { id: 6, lastName: 'Melisandre', Email: null, age: 150 },
-  { id: 7, lastName: 'Clifford', Email: 'Ferrara', age: 44 },
-  { id: 8, lastName: 'Frances', Email: 'Rossini', age: 36 },
-  { id: 9, lastName: 'Roxie', Email: 'Harvey', age: 65 },
-];
+
 
   return (
     <div style={{ height: 400, width: '100%' }}>
