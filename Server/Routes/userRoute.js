@@ -22,6 +22,7 @@ router.put("/:id",Authorization, async (req, res)=>{
         }}
 )
 
+
 //Delete
 router.delete("/:id", Authorization, async(req,res)=>{
     try {
@@ -41,6 +42,18 @@ router.get("/users", Admin, async(req,res)=>{
     res.status(200).json(error)  
   }
 })
+
+//Admin
+router.put("/users/:id", Admin, async (req, res) => {
+  try {
+      const updatedUser = await User.findByIdAndUpdate(req.params.id, {
+          $set: { isAdmin: true }
+      }, { new: true });
+      res.status(200).json(updatedUser);
+  } catch (error) {
+      res.status(500).json(error);
+  }
+});
 
 // get user
 router.get("/:id", Admin, async(req,res)=>{

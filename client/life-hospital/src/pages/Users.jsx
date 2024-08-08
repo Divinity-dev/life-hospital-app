@@ -7,19 +7,27 @@ import axios from "axios"
 import { useSelector } from 'react-redux';
 
 const Users = () => {
-    const [users, setrUsers]=useState([])
+    const [users, setUsers]=useState([])
   const token =useSelector(state=>state.user.currentUser.accessToken)
   const config = {
     headers:{
         Authorization:`Bearer ${token}`
     }
   }
+
+  const handleClick= async (id)=>{
+    try {
+      await axios.delete(`http://localhost:3000/api/user/${id}`,config)
+      setUsers(users.filter((user)=>user._id !== id))
+    } catch (error) {
+      console.log(error)
+    }
+  }
     useEffect(()=>{
         const getUsers = async ()=>{
             try {
                 const res = await axios.get("http://localhost:3000/api/user/users",config)
-                console.log(res.data)
-                setrUsers(res.data)
+                setUsers(res.data)
             } catch (error) {
                 console.log(error)
             }
@@ -46,7 +54,7 @@ const columns = [
                 <Link>
                 <button className='edit'>Edit</button>
                 </Link>
-               <DeleteOutline className='flex justify-center items-center mt-4 text-red-500'/>
+               <DeleteOutline onClick={()=>{handleClick(params.row._id)}} className='flex justify-center items-center mt-4 text-red-500 cursor-pointer'/>
             </div>
         )
     },
