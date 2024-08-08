@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 const Users = () => {
     const [users, setUsers]=useState([])
     const [adminstat, setAdminstat]=useState("Edit")
-  const token =useSelector(state=>state.user.currentUser.accessToken)
+  const token =useSelector(state=>state.user.currentUser?.accessToken)
   const config = {
     headers:{
         Authorization:`Bearer ${token}`

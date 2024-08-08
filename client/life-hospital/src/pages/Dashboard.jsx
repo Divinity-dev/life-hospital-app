@@ -7,10 +7,10 @@ import { useDispatch } from 'react-redux'
 const Dashboard = () => {
     const [Image,setImage]=useState('')
     const bookings = useSelector(state=>state.booking.Appointment)
-    const user = useSelector(state=>state.user.currentUser.user.username)
+    const user = useSelector(state=>state.user.currentUser.user?.username)
     const token = useSelector(state=>state.user.currentUser?.accessToken)
     const dispatch = useDispatch()
-    const id =useSelector(state=>state.user.currentUser.user._id)
+    const id =useSelector(state=>state.user.currentUser?.user._id)
     const handleImage = (e)=>{
         const file = e.target.files[0];
         const reader = new FileReader();

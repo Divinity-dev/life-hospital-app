@@ -7,7 +7,7 @@ import {logout} from "../redux/userSlice"
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
   const login = useSelector(state=>state.user.currentUser)
-  const Admin = useSelector(state=>state.user.currentUser.user.isAdmin)
+  const Admin = useSelector(state=>state.user.currentUser?.user?.isAdmin)
   const booking = useSelector(state=>state.booking.Appointment)
   const dispatch = useDispatch()
 
@@ -38,7 +38,7 @@ const Navbar = () => {
            <Link to={'/blogposts'}>
             <li>Blog</li>
             </Link>
-            <Link to={'./booking'}>
+            <Link to={'./dashboard'}>
             <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">{booking.length}</span></li>
             </Link>
             
@@ -74,7 +74,7 @@ const Navbar = () => {
             <Link to={'/blogposts'}>
             <li onClick={() => setToggle(false)}>Blog</li>
             </Link>
-            <Link to={'./booking'}>
+            <Link to={'./dashboard'}>
             <li onClick={() => setToggle(false)}>Bookings<span className="ml-1">{booking.length}</span></li>
             </Link>
             <Link to={'./login'}>

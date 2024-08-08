@@ -45,16 +45,30 @@ const Blogposts = () => {
     }
 
     const post = posts[posts.length-1]
-    const Admin = useSelector(state=>state.user.currentUser.user.isAdmin)
+    const Admin = useSelector(state=>state.user.currentUser?.user?.isAdmin)
     const id = post?._id
-    const user = useSelector(state=>state.user.currentUser.accessToken)
-const UserID = useSelector(state=>state.user.currentUser.user._id)
+    
+    const user = useSelector(state=>state.user.currentUser?.accessToken)
+const UserID = useSelector(state=>state.user.currentUser?.user._id)
 
 const config = {
   headers:{
       Authorization:`Bearer ${user}`
   }
 }
+
+useEffect(()=>{
+  const getPosts = async ()=>{
+      try {
+          const res = await axios.get("http://localhost:3000/api/post")
+      setPosts(res.data)
+      } catch (error) {
+          console.log(error)
+      }
+      
+  }
+  getPosts()
+  },[])
 
 useEffect(()=>{
   const getComments = async ()=>{
@@ -84,7 +98,7 @@ useEffect(()=>{
     const handleclick = async (e)=>{
       e.preventDefault()
       try {
-       const res = await axios.post("http://localhost:3000/api/comment", {UserID, postID:id.ID, comment:inputcomments}, config)
+       const res = await axios.post("http://localhost:3000/api/comment", {UserID, postID:id, comment:inputcomments}, config)
       } catch (error) {
        console.log(error)
       }
@@ -92,18 +106,7 @@ useEffect(()=>{
    
     
 
-useEffect(()=>{
-const getPosts = async ()=>{
-    try {
-        const res = await axios.get("http://localhost:3000/api/post")
-    setPosts(res.data)
-    } catch (error) {
-        console.log(error)
-    }
-    
-}
-getPosts()
-},[])
+
   return (
     <div className='flex'>
       <div className='basis-3/4 flex flex-col border-r-2 p-4 justify-center items-center'>

@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 
 const Postlist = () => {
     const [posts, setPosts] = useState([])
-    const token =useSelector(state=>state.user.currentUser.accessToken)
+    const token =useSelector(state=>state.user.currentUser?.accessToken)
     const config = {
       headers:{
           Authorization:`Bearer ${token}`

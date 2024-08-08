@@ -9,13 +9,13 @@ const [Image, setImage]= useState('')
 const navigate =useNavigate()
 
 const {id}=useParams()
-const token =useSelector(state=>state.user.currentUser.accessToken)
+const token =useSelector(state=>state.user.currentUser?.accessToken)
     const config = {
       headers:{
           Authorization:`Bearer ${token}`
       }
     }
-    const author = useSelector(state=>state.user.currentUser.user.username)
+    const author = useSelector(state=>state.user.currentUser.user?.username)
 
 const handlechange=(e)=>{
 const value = e.target.value

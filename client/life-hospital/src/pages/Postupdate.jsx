@@ -22,7 +22,7 @@ const Postupdate = () => {
      })
   }
   const authToken = useSelector(state=>state.user.currentUser?.accessToken)
-  const author = useSelector(state=>state.user.currentUser.user.username)
+  const author = useSelector(state=>state.user.currentUser.user?.username)
   
   const config = {
     headers:{

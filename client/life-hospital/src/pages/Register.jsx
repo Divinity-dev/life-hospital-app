@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import {Link} from "react-router-dom"
 import axios from "axios"
+import {loginSuccess,loginfailure} from "../redux/userSlice"
+import { useDispatch } from 'react-redux'
 
 const Register = () => {
 const [user, setUser] = useState({
@@ -8,6 +10,7 @@ const [user, setUser] = useState({
   Email: '',
   password: ''
 })
+const dispatch= useDispatch()
 
 const handlechange = (e)=>{
 const value = e.target.value;
@@ -21,12 +24,14 @@ const handleSubmit = async (e)=>{
 e.preventDefault()
 try {
   const res = await axios.post("http://localhost:3000/api/auth/register", user)
+  dispatch(loginSuccess(res.data))
   setUser({
     username: '',
     Email: '',
     password: ''
   })
 } catch (error) {
+  dispatch(loginfailure())
   console.log(error)
 }
 }

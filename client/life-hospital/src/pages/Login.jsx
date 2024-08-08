@@ -20,7 +20,7 @@ const handleSubmit = async (e)=>{
  e.preventDefault()
  try {
   const res = await axios.post("http://localhost:3000/api/auth/login",user)
- 
+ console.log(res.data)
   dispatch(loginSuccess(res.data))
   navigate("/")
  } catch (error) {

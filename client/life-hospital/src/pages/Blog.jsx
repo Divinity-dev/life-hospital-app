@@ -20,12 +20,12 @@ const Blog = () => {
     }
 
     const likeID = useSelector(state=>state.like.like?._id)
-    const Admin = useSelector(state=>state.user.currentUser.user.isAdmin)
+    const Admin = useSelector(state=>state.user.currentUser.user?.isAdmin)
     const id = useParams()
     const dispatch = useDispatch()
 
-const user = useSelector(state=>state.user.currentUser.accessToken)
-const UserID = useSelector(state=>state.user.currentUser.user._id)
+const user = useSelector(state=>state.user.currentUser?.accessToken)
+const UserID = useSelector(state=>state.user.currentUser?.user._id)
     const config = {
         headers:{
             Authorization:`Bearer ${user}`

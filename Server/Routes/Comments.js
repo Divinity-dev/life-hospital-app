@@ -40,7 +40,7 @@ router.delete("/:id", Authorization, async(req,res)=>{
 })
 
 // get Comment
-router.get("/:id", Admin, async(req,res)=>{
+router.get("/:id",  async(req,res)=>{
     try {
         const Comments = await Comment.find({postID:req.params.id})
         if (!Comments) {
