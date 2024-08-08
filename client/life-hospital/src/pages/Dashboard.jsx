@@ -43,6 +43,12 @@ const Dashboard = () => {
         console.log(error)
        }
    }
+   const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    
+    return `${formattedDate} `
+};
 
   return (
     <div>
@@ -59,7 +65,7 @@ const Dashboard = () => {
         bookings.map((item)=>(
             <div key={item._id} className='bg-green-500 text-white font-bold flex justify-center items-center italic mb-4'>
                 <p>
-                    You have an Appointment with life hospital on {item.Date}, at {item.Time}, over {item.purpose}.
+                    You have an Appointment with life hospital on {formatDate(item.Date)}, at {item.Time}, over {item.purpose}.
                     <button className='bg-red-500 p-1 border-l-black rounded-xl w-28 ml-4 ' onClick={()=>{handleclick(item._id)}}>cancel</button>
                 </p>
                 </div>

@@ -23,7 +23,7 @@ const Landing = () => {
 
   return (
     <div>
-      <div className='flex flex-col md:flex-row h-[80vh] p-6 relative xs:mb-40 md:mb-0'  style={{ backgroundColor: `#${doctors[index].bg}` }} key={doctors[index].id}>
+      <div className='flex flex-col md:flex-row h-[80vh] p-6 xs:mb-40 md:mb-0'  style={{ backgroundColor: `#${doctors[index].bg}` }} key={doctors[index].id}>
         <img src={doctors[index].image} alt="" className='flex-1 h-full mr-4 xs:mb-6' />
         <div className='flex flex-1 flex-col self-center justify-left  xs:mb-40'>
           <h1 className='mb-16 text-50'>{doctors[index].title}</h1>

@@ -3,6 +3,7 @@ import { Menu, Close } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {logout} from "../redux/userSlice"
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
@@ -10,16 +11,18 @@ const Navbar = () => {
   const Admin = useSelector(state=>state.user.currentUser?.user?.isAdmin)
   const booking = useSelector(state=>state.booking.Appointment)
   const dispatch = useDispatch()
+  const navigate = useDispatch()
 
   const logOut = ()=>{
   dispatch(logout())
+  navigate("/")
   setToggle(false)
   }
 
   return (
-    <div className='sticky top-0 z-50 h-16'>
+    <div className='sticky top-0 z-50 h-24'>
       <div className='flex justify-between p-4 bg-green-800 text-white '>
-        <h2>Logo</h2>
+        <h2 className='italic text-center font-bold text-2xl w-30'>Life Hospital</h2>
         <nav className='flex items-center'>
           {/* Desktop Menu */}
           <ul className='hidden md:flex justify-between space-x-4'>
