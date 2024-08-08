@@ -51,7 +51,7 @@ const Postlist = () => {
           headerName:'status', renderCell: (params)=>{
               return(
                   <div className='flex border-none'>
-                     <Link>
+                     <Link to={`/editpost/${params.row._id}`}>
                      <button className='edit'>Edit</button>
                      </Link>
                      
