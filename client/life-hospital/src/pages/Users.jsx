@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 const Users = () => {
     const [users, setUsers]=useState([])
+    const [adminstat, setAdminstat]=useState("Edit")
   const token =useSelector(state=>state.user.currentUser.accessToken)
   const config = {
     headers:{
@@ -19,6 +20,15 @@ const Users = () => {
     try {
       await axios.delete(`http://localhost:3000/api/user/${id}`,config)
       setUsers(users.filter((user)=>user._id !== id))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleAdmin=async (id)=>{
+    try {
+      const res = await axios.put(`http://localhost:3000/api/user/users/${id}`,{isAdmin:adminstat},config)
+      console.log(res.data)
     } catch (error) {
       console.log(error)
     }
@@ -47,13 +57,26 @@ const columns = [
   }, width:220 },
   { field: 'Email', headerName: 'Email', width: 180 },
   {
+    field: 'status',
+    headerName:'status', renderCell: (params)=>{
+        return(
+            <div className='flex border-none'>
+               <select name="" id="" onChange={(e)=>{setAdminstat(e.target.value)}}>
+                <option value="">{params.row.isAdmin? "Admin":"Not Admin"}</option>
+                <option >false</option>
+                <option >true</option>
+               </select>
+               <button className='edit' onClick={()=>{handleAdmin(params.row._id)}}>Edit</button>
+            </div>
+        )
+    },
+    width: 150,
+  },
+  {
     field: 'Action',
     headerName:'Action', renderCell: (params)=>{
         return(
             <div className='flex'>
-                <Link>
-                <button className='edit'>Edit</button>
-                </Link>
                <DeleteOutline onClick={()=>{handleClick(params.row._id)}} className='flex justify-center items-center mt-4 text-red-500 cursor-pointer'/>
             </div>
         )

@@ -46,8 +46,9 @@ router.get("/users", Admin, async(req,res)=>{
 //Admin
 router.put("/users/:id", Admin, async (req, res) => {
   try {
+    const isAdmin = req.body.isAdmin === "true";
       const updatedUser = await User.findByIdAndUpdate(req.params.id, {
-          $set: { isAdmin: true }
+          $set: { isAdmin: isAdmin  }
       }, { new: true });
       res.status(200).json(updatedUser);
   } catch (error) {
