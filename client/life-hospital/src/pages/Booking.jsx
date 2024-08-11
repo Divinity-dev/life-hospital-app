@@ -83,7 +83,7 @@ try {
             others
             </option>
         </select>
-        <input name="Details" type="text" placeholder='Please enter details here' className='border-2 w-full mb-4 p-2 h-28' onChange={handlechange}/>
+        <input name="Details" type="text" placeholder='Please enter details here' className='border-2 w-full mb-4 p-2 h-28 placeholder' onChange={handlechange}/>
         <button className='bg-green-950 p-2 text-white cursor-pointer w-40 mb-6 rounded-full'>Submit</button>
       </form>
     </div>

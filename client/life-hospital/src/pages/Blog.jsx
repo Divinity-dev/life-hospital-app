@@ -23,6 +23,7 @@ const Blog = () => {
     const Admin = useSelector(state=>state.user.currentUser.user?.isAdmin)
     const id = useParams()
     const dispatch = useDispatch()
+    console.log(likes)
 
 const user = useSelector(state=>state.user.currentUser?.accessToken)
 const UserID = useSelector(state=>state.user.currentUser?.user._id)

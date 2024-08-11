@@ -30,7 +30,7 @@ const Staff = () => {
         <h1 className='text-7xl text-blue-800 mb-6'>Life Hospital Blog</h1>
         <h2 className='italic font-bold w-1/3 mb-6 text-center'>View and download uplifting materials from our blog.
         What are you waiting for?</h2>
-        <Link to={'/booking'}>
+        <Link to={'/blogposts'}>
         <button className='border-1 bg-glx w-200 rounded-full p-2 mb-6'>Visit our blog now</button>
         </Link>
       </div>

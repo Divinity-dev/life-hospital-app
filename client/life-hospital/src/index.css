@@ -25,6 +25,18 @@
     align-items: center;
 }
 
+.placeholder::placeholder {
+    color: #9CA3AF; /* Adjust placeholder color to match Tailwind's default gray-500 */
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    transform: translateY(-50%);
+  }
+  
+  .placeholder:focus::placeholder {
+    transform: translateY(0);
+  }
+
     
 
 
