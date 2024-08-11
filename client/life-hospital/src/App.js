@@ -23,7 +23,7 @@ function App() {
   const isLoginPage = location.pathname === '/login';
   const isregisterPage = location.pathname === '/register';
   const currentUser = useSelector(state => state.user.currentUser);
-  const Admin = currentUser?.user?.isAdmin || false;
+  const Admin = currentUser?.user.isAdmin || false;
   
   
   

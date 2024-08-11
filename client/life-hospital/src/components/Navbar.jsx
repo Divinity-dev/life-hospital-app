@@ -15,7 +15,11 @@ const Navbar = () => {
 
   const logOut = ()=>{
   dispatch(logout())
-  navigate("/")
+  try {
+    navigate("/");
+  } catch (error) {
+    console.error("Navigation error:", error);
+  }
   setToggle(false)
   }
 
