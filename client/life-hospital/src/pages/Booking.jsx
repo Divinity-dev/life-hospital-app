@@ -43,7 +43,7 @@ try {
 
 
   return (
-    <div className='flex flex-col justify-center items-center w-full px-40'>
+    <div className='flex flex-col justify-center items-center w-full px-4'>
       <h2 className='text-2xl font-bold mb-4'>Book an Appointment</h2>
       <form onSubmit={handleSubmit} action="" className='flex flex-col justify-center items-start w-full'>
         <input type="text" placeholder='First name' className='border-2 w-full mb-4 p-2' name='Firstname' onChange={handlechange}/>

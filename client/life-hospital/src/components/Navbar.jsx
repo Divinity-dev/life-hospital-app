@@ -11,7 +11,7 @@ const Navbar = () => {
   const Admin = useSelector(state=>state.user.currentUser?.user?.isAdmin)
   const booking = useSelector(state=>state.booking.Appointment)
   const dispatch = useDispatch()
-  const navigate = useDispatch()
+  const navigate = useNavigate()
 
   const logOut = ()=>{
   dispatch(logout())

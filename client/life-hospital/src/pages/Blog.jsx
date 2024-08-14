@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import {ThumbUpOffAlt, ThumbUpAlt, Comment} from "@mui/icons-material"
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addlike, removelike } from '../redux/likeSlice'
+
 
 
 const Blog = () => {
@@ -23,15 +24,16 @@ const Blog = () => {
     const Admin = useSelector(state=>state.user.currentUser.user?.isAdmin)
     const id = useParams()
     const dispatch = useDispatch()
-    console.log(likes)
+    
 
 const user = useSelector(state=>state.user.currentUser?.accessToken)
 const UserID = useSelector(state=>state.user.currentUser?.user._id)
-    const config = {
-        headers:{
-            Authorization:`Bearer ${user}`
-        }
-    }
+const config = useMemo(() => ({
+    headers: {
+      Authorization: `Bearer ${user}`,
+    },
+  }), [user]);
+  console.log(post._id)
 useEffect(()=>{
     const getLikes = async ()=>{
         try {
@@ -44,8 +46,7 @@ useEffect(()=>{
 
     }
     getLikes()
-},[id.ID])
-
+},[id.ID, config])
 
     const handleLikes = async (name)=>{
         setLike(like? false:true)

@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom'
 
 const Postupdate = () => {
   const [formdata, setFormData]=useState({})
   const [Image, setImage]= useState('')
+  const navigate = useNavigate()
+
   const handleImage = (e)=>{
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -14,6 +17,8 @@ const Postupdate = () => {
     };
     reader.readAsDataURL(file);
   }
+
+
   const handlechange = (e)=>{
      const value = e.target.value
      setFormData({...formdata,
@@ -29,11 +34,16 @@ const Postupdate = () => {
       Authorization:`Bearer ${authToken}`
     }
 }
+
+
 const formData = async (e)=>{
 e.preventDefault()
-const res = await axios.post("http://localhost:3000/api/post", {...formdata, Image, Author:author}, config)
-
-
+try {
+    await axios.post("http://localhost:3000/api/post", {...formdata, Image, Author:author}, config)
+  navigate("/postlist")
+} catch (error) {
+  console.log(error)
+}
 
 }
   return (

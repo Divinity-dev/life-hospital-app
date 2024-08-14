@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import {ThumbUpOffAlt, ThumbUpAlt, Comment} from "@mui/icons-material"
 import axios from 'axios'
-import { Link,useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addlike, removelike } from '../redux/likeSlice'
+import { useMemo } from 'react'
 
 const Blogposts = () => {
     const [posts, setPosts] = useState([])
@@ -12,37 +13,7 @@ const Blogposts = () => {
     const [like, setLike] = useState(false)
     const [comments, setComments] = useState([])
     const [inputcomments, setinputComments] = useState([])
-    const [likes, setLikes] = useState([])
     const [postLikes, setpostLikes]=useState([])
-   
-    const handlecomment = ()=>{
-        setComment(comment? false:true)
-    }
-
-    const likeID = useSelector(state=>state.like.like?._id)
-    const dispatch = useDispatch()
-
-    const handleLikes = async (name)=>{
-        setLike(like? false:true)
-        if(name==="addLike"){
-          try {
-              const res = await axios.post("http://localhost:3000/api/like",{UserID, postID:id},config)
-              dispatch(addlike(res.data))
-          } catch (error) {
-              console.log(error)
-          }
-          
-      }else{
-
-          try {
-              const res = await axios.delete(`http://localhost:3000/api/like/${likeID}`,config)
-              dispatch(removelike())
-          } catch (error) {
-              console.log(error)
-          }
-        
-      }
-    }
 
     const post = posts[posts.length-1]
     const Admin = useSelector(state=>state.user.currentUser?.user?.isAdmin)
@@ -51,11 +22,42 @@ const Blogposts = () => {
     const user = useSelector(state=>state.user.currentUser?.accessToken)
 const UserID = useSelector(state=>state.user.currentUser?.user._id)
 
-const config = {
-  headers:{
-      Authorization:`Bearer ${user}`
-  }
-}
+
+const config = useMemo(() => ({
+  headers: {
+    Authorization: `Bearer ${user}`,
+  },
+}), [user]);
+ 
+    const handlecomment = ()=>{
+        setComment(comment? false:true)
+    }
+
+    const likeID = useSelector(state=>state.like.like?._id)
+    const dispatch = useDispatch()
+    const handleLikes = async (name)=>{
+      setLike(like? false:true)
+        if(name==="addLike"){
+          try {
+              const res = await axios.post("http://localhost:3000/api/like",{UserID, postID:id},config)
+              dispatch(addlike(res.data))
+          } catch (error) {
+              console.log(error)
+          }
+         
+      }else{
+
+          try {
+               await axios.delete(`http://localhost:3000/api/like/${likeID}`,config)
+              dispatch(removelike())
+          } catch (error) {
+              console.log(error)
+          }
+        
+      }
+    }
+
+   
 
 useEffect(()=>{
   const getPosts = async ()=>{
@@ -69,7 +71,6 @@ useEffect(()=>{
   }
   getPosts()
   },[])
-
 useEffect(()=>{
   const getComments = async ()=>{
       try {
@@ -93,24 +94,22 @@ useEffect(()=>{
 
   }
   getLikes()
-},[id])
-
+},[id,config])
     const handleclick = async (e)=>{
       e.preventDefault()
       try {
-       const res = await axios.post("http://localhost:3000/api/comment", {UserID, postID:id, comment:inputcomments}, config)
+        await axios.post("http://localhost:3000/api/comment", {UserID, postID:id, comment:inputcomments}, config)
       } catch (error) {
        console.log(error)
       }
    }
    
-    
 
 
   return (
-    <div className='flex'>
+    <div className='flex flex-col md:flex-row'>
       <div className='basis-3/4 flex flex-col border-r-2 p-4 justify-center items-center'>
-      <img className={post?.Image} alt="pastor chris" />
+      <img src={post?.Image} alt="pastor chris" className='w-96 h-96 object-cover'/>
       <h2 className='text-2xl font-bold text-center mb-2'>{post?.Title}</h2>
       <p className='italic mb-4'>
     {post?.Body}
@@ -134,11 +133,11 @@ useEffect(()=>{
       </div>
       <div className='basis-1/4 p-2'>
       <h2 className='text-2xl font-bold text-center mb-4'>Relatted posts</h2>
-      {posts.map((item)=>(
+      {posts?.map((item)=>(
         <Link to={`/blogpost/${item._id}`}>
-         <div className='flex mb-4 justify-center items-center'>
-         <img className='w-10 h-10 md:w-20 md:h-20 rounded-full mr-5' src={item.Image} alt="" />
-         <p className='text-sm md:text-2xl'>{item.Title}</p>
+         <div className='flex mb-4 justify-start items-center'>
+         <img className='w-10 h-10 md:w-15 md:h-15 rounded-full mr-5 object-cover' src={item.Image} alt="" />
+         <p className='text-sm md:text-2xl italic'>{item.Title}</p>
        </div></Link>
       ))}
       </div>
