@@ -51,7 +51,7 @@ try {
     <div>
       <form action="" className='flex flex-col justify-center items-center m-4' onSubmit={formData }>
             <input type="text" name='Title' onChange={handlechange} className='border-2 w-1/2 boredr-black p-2 rounded-full mb-4' placeholder='Title'/>
-            <input type="text" name='Body' onChange={handlechange} className='border-2 w-1/2 h-40 boredr-black p-2 rounded-sm mb-4' placeholder='Post'/>
+            <input type="text" name='Body' onChange={handlechange} className='border-2 w-1/2 h-40 boredr-black p-2 rounded-sm mb-4 placeholder' placeholder='Post'/>
             <input type="file"  onChange={handleImage}/>
             <button className='bg-green-500 p-1 border-l-black rounded-xl w-32 '>submit</button>
         </form>

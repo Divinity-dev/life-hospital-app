@@ -23,6 +23,8 @@
     "react-scripts": "5.0.1",
     "redux": "^5.0.1",
     "redux-persist": "^6.0.0",
+    "timeago": "^1.6.7",
+    "timeago-react": "^3.0.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

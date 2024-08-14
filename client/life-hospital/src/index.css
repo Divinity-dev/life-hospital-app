@@ -26,7 +26,7 @@
 }
 
 .placeholder::placeholder {
-    color: #9CA3AF; /* Adjust placeholder color to match Tailwind's default gray-500 */
+    color: #9CA3AF; 
     position: absolute;
     top: 8px;
     left: 8px;

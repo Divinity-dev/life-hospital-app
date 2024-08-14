@@ -51,13 +51,13 @@ const Dashboard = () => {
 };
 
   return (
-    <div>
-        <div className='flex flex-col justify-center items-center'>
+    <div className='p-4'>
+        <div className='flex flex-col justify-center items-center '>
         <p className='text-center font-semibold italic mb-4'>
         welcome @{user}, you can add a picture to your profile here...
       </p>
-      <div className='flex mb-4'>
-      <input type="file" className=' mr-2' onChange={handleImage}/>
+      <div className='flex mb-4 px-8'>
+      <input type="file"  onChange={handleImage}/>
       <button type="button" className='bg-gray-500 p-1 border-l-black rounded-xl w-32 ' onClick={handleSubmit}>upload</button>
       </div>
        </div>

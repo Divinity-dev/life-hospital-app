@@ -35,6 +35,7 @@ const formattedDetails = {
 try {
     const res = await axios.post("http://localhost:3000/api/bookings",formattedDetails, config)
    dispatch(addBooking(res.data))
+   window.location.reload();
 } catch (error) {
     console.log(error)
     

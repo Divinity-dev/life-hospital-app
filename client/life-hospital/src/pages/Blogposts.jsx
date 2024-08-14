@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addlike, removelike } from '../redux/likeSlice'
 import { useMemo } from 'react'
+import {format} from "timeago.js"
 
 const Blogposts = () => {
     const [posts, setPosts] = useState([])
@@ -41,6 +42,7 @@ const config = useMemo(() => ({
           try {
               const res = await axios.post("http://localhost:3000/api/like",{UserID, postID:id},config)
               dispatch(addlike(res.data))
+              window.location.reload();
           } catch (error) {
               console.log(error)
           }
@@ -50,6 +52,7 @@ const config = useMemo(() => ({
           try {
                await axios.delete(`http://localhost:3000/api/like/${likeID}`,config)
               dispatch(removelike())
+              window.location.reload();
           } catch (error) {
               console.log(error)
           }
@@ -99,6 +102,7 @@ useEffect(()=>{
       e.preventDefault()
       try {
         await axios.post("http://localhost:3000/api/comment", {UserID, postID:id, comment:inputcomments}, config)
+        window.location.reload();
       } catch (error) {
        console.log(error)
       }
@@ -121,13 +125,16 @@ useEffect(()=>{
         </div>
         
       </div>
-      {comment && <input onChange={(e)=>setinputComments(e.target.value)} type="text" placeholder='Leave a comment.' className='w-1/2 h-40 rounded-sm border-2 p-2'/>}
+      {comment && <input onChange={(e)=>setinputComments(e.target.value)} type="text" placeholder='Leave a comment.' className='w-1/2 h-40 rounded-sm border-2 p-2 placeholder pb-28'/>}
       {
-        comment && <button onClick={handleclick} className='w-40 rounded-full p-2 bg-green-500 mt-4'>submit</button>
+        comment && <button onClick={handleclick} className='w-40 rounded-full p-2 bg-green-500 mt-4 mb-4'>submit</button>
       }
        <div className={Admin? "block":"hidden"}>
            {comments?.map((Comment)=>(
-            <li>{Comment.comment}</li>
+            <div className='flex flex-col border-0 w-auto p-2 mb-4'>
+              <h3 className='italic'>{Comment.comment}</h3>
+              <span className='font-light text-10'>{format(Comment.createdAt)}</span>
+              </div>
            ))}
       </div>
       </div>
