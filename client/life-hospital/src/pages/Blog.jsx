@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { addlike, removelike } from '../redux/likeSlice'
+import {format} from "timeago.js"
 
 
 
@@ -100,6 +101,7 @@ useEffect(()=>{
        try {
         const res = await axios.post("http://localhost:3000/api/comment", {UserID, postID:id.ID, comment:inputcomments}, config)
         setinputComments('')
+        window.location.reload()
        } catch (error) {
         console.log(error)
        }
@@ -109,7 +111,7 @@ useEffect(()=>{
   return (
     
       <div className='flex flex-col justtify-center items-center p-4'>
-      <img className='w-80 h-80 mb-4' src={post?.Image} alt="pastor chris" />
+      <img className='w-80 h-80 mb-4 object-contain' src={post?.Image} alt="pastor chris" />
       <h2 className='text-2xl font-bold text-center mb-2'>{post?.Title}</h2>
       <p className='italic mb-4'>{post?.Body}</p>
       <div className='flex '>
@@ -119,14 +121,17 @@ useEffect(()=>{
         </div>
         
       </div>
-      {comment && <input onChange={(e)=>setinputComments(e.target.value)} type="text" placeholder='Leave a comment.' className='w-1/2 h-10 rounded-sm border-2 p-2'/> 
+      {comment && <input onChange={(e)=>setinputComments(e.target.value)} type="text" placeholder='Leave a comment.' className='w-1/2 h-40 rounded-sm border-2 p-2 placeholder pb-28'/> 
       }
       {
         comment && <button onClick={handleclick} className='w-40 rounded-full p-2 bg-green-500 mt-4'>submit</button>
       }
       <div className={Admin? "block":"hidden"}>
            {comments?.map((Comment)=>(
-            <li>{Comment.comment}</li>
+             <div className='flex flex-col border-0 w-auto p-2 mb-4'>
+             <h3 className='italic'>{Comment.comment}</h3>
+             <span className='font-light text-10'>{format(Comment.createdAt)}</span>
+             </div>
            ))}
       </div>
       </div>

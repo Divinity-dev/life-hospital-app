@@ -113,7 +113,7 @@ useEffect(()=>{
   return (
     <div className='flex flex-col md:flex-row'>
       <div className='basis-3/4 flex flex-col border-r-2 p-4 justify-center items-center'>
-      <img src={post?.Image} alt="pastor chris" className='w-96 h-96 object-cover'/>
+      <img src={post?.Image} alt="pastor chris" className='w-96 h-96 object-contain'/>
       <h2 className='text-2xl font-bold text-center mb-2'>{post?.Title}</h2>
       <p className='italic mb-4'>
     {post?.Body}
