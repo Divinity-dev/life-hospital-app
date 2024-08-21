@@ -9,6 +9,7 @@ import LikeRoute from "./Routes/LikeRoute.js"
 import BookingRouthe from "./Routes/BookingRouthe.js"
 import Comments from "./Routes/Comments.js"
 import multer from 'multer';
+import path from "path"
 
 
 dotenv.config()
@@ -18,7 +19,6 @@ mongoose.connect(process.env.Mongo_url).then(()=>{
     console.log(err)
 })
 const app = express();
-const path = require('path');
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 
