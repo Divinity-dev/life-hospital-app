@@ -36,7 +36,6 @@ const formattedDetails = {
 try {
     const res = await axios.post(`${apiUrl}/api/bookings`,{...formattedDetails, UserID}, config)
     setDetails({});
-    setSuccess(true);
    window.location.reload();
 } catch (error) {
     console.log(error)
