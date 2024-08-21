@@ -10,6 +10,7 @@ import BookingRouthe from "./Routes/BookingRouthe.js"
 import Comments from "./Routes/Comments.js"
 import multer from 'multer';
 
+
 dotenv.config()
 mongoose.connect(process.env.Mongo_url).then(()=>{
     console.log("DB connected successfully")
@@ -17,6 +18,13 @@ mongoose.connect(process.env.Mongo_url).then(()=>{
     console.log(err)
 })
 const app = express();
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
 app.use(express.json({ limit: '50mb' }));
 app.use(cors())
 app.use(express.json())
