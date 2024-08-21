@@ -15,10 +15,10 @@ const Users = () => {
         Authorization:`Bearer ${token}`
     }
   }
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const handleClick= async (id)=>{
     try {
-      await axios.delete(`http://localhost:3000/api/user/${id}`,config)
+      await axios.delete(`${apiUrl}/api/user/${id}`,config)
       setUsers(users.filter((user)=>user._id !== id))
     } catch (error) {
       console.log(error)
@@ -27,8 +27,9 @@ const Users = () => {
 
   const handleAdmin=async (id)=>{
     try {
-      const res = await axios.put(`http://localhost:3000/api/user/users/${id}`,{isAdmin:adminstat},config)
+      const res = await axios.put(`${apiUrl}/api/user/users/${id}`,{isAdmin:adminstat},config)
       console.log(res.data)
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
@@ -36,7 +37,7 @@ const Users = () => {
     useEffect(()=>{
         const getUsers = async ()=>{
             try {
-                const res = await axios.get("http://localhost:3000/api/user/users",config)
+                const res = await axios.get(`${apiUrl}/api/user/users`,config)
                 setUsers(res.data)
             } catch (error) {
                 console.log(error)
@@ -61,8 +62,8 @@ const columns = [
     field: 'status',
     headerName:'status', renderCell: (params)=>{
         return(
-            <div className='flex border-none'>
-               <select name="" id="" onChange={(e)=>{setAdminstat(e.target.value)}}>
+            <div className='flex border-none justify-center items-center'>
+               <select name="" id="" onChange={(e)=>{setAdminstat(e.target.value)}} className='border-2 bg-red-500 rounded-full p-2 w-40'>
                 <option value="">{params.row.isAdmin? "Admin":"Not Admin"}</option>
                 <option >false</option>
                 <option >true</option>
@@ -71,7 +72,7 @@ const columns = [
             </div>
         )
     },
-    width: 150,
+    width: 200,
   },
   {
     field: 'Action',

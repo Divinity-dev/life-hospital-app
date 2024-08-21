@@ -22,7 +22,7 @@ const Blogposts = () => {
     
     const user = useSelector(state=>state.user.currentUser?.accessToken)
 const UserID = useSelector(state=>state.user.currentUser?.user._id)
-
+const apiUrl = process.env.REACT_APP_API_URL;
 
 const config = useMemo(() => ({
   headers: {
@@ -40,7 +40,7 @@ const config = useMemo(() => ({
       setLike(like? false:true)
         if(name==="addLike"){
           try {
-              const res = await axios.post("http://localhost:3000/api/like",{UserID, postID:id},config)
+              const res = await axios.post(`${apiUrl}/api/like`,{UserID, postID:id},config)
               dispatch(addlike(res.data))
               window.location.reload();
           } catch (error) {
@@ -50,7 +50,7 @@ const config = useMemo(() => ({
       }else{
 
           try {
-               await axios.delete(`http://localhost:3000/api/like/${likeID}`,config)
+               await axios.delete(`${apiUrl}/api/like/${likeID}`,config)
               dispatch(removelike())
               window.location.reload();
           } catch (error) {
@@ -65,7 +65,7 @@ const config = useMemo(() => ({
 useEffect(()=>{
   const getPosts = async ()=>{
       try {
-          const res = await axios.get("http://localhost:3000/api/post")
+          const res = await axios.get(`${apiUrl}/api/post`)
       setPosts(res.data)
       } catch (error) {
           console.log(error)
@@ -77,7 +77,7 @@ useEffect(()=>{
 useEffect(()=>{
   const getComments = async ()=>{
       try {
-          const res = await axios.get(`http://localhost:3000/api/comment/${id}`,config)
+          const res = await axios.get(`${apiUrl}/api/comment/${id}`,config)
           setComments(res.data)
          
       } catch (error) {
@@ -89,7 +89,7 @@ useEffect(()=>{
 useEffect(()=>{
   const getLikes = async ()=>{
       try {
-          const res = await axios.get(`http://localhost:3000/api/like/${id}`,config)
+          const res = await axios.get(`${apiUrl}/api/like/${id}`,config)
           setpostLikes(res.data)
       } catch (error) {
           console.log(error)
@@ -101,7 +101,7 @@ useEffect(()=>{
     const handleclick = async (e)=>{
       e.preventDefault()
       try {
-        await axios.post("http://localhost:3000/api/comment", {UserID, postID:id, comment:inputcomments}, config)
+        await axios.post(`${apiUrl}/api/comment`, {UserID, postID:id, comment:inputcomments}, config)
         window.location.reload();
       } catch (error) {
        console.log(error)

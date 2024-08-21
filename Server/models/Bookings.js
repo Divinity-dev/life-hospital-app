@@ -5,6 +5,7 @@ const BookingSchema = new mongoose.Schema(
     {
         Firstname:{type:String,  required:true},
         Lastname:{type:String,  required:true},
+        UserID:{type:mongoose.Schema.Types.ObjectId, ref:'User', unique:true},
         Gender:{type:String},
         Date:{type:Date},
         Time:{type:String},

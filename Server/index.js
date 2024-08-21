@@ -22,7 +22,9 @@ app.use(cors())
 app.use(express.json())
 
 
-
+app.get('/', (req, res) => {
+    res.send('Backend is up and running!');
+});
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 app.use("/api/post", PostRoute)

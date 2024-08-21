@@ -26,7 +26,7 @@ const Blog = () => {
     const id = useParams()
     const dispatch = useDispatch()
     
-
+    const apiUrl = process.env.REACT_APP_API_URL;
 const user = useSelector(state=>state.user.currentUser?.accessToken)
 const UserID = useSelector(state=>state.user.currentUser?.user._id)
 const config = useMemo(() => ({
@@ -38,7 +38,7 @@ const config = useMemo(() => ({
 useEffect(()=>{
     const getLikes = async ()=>{
         try {
-            const res = await axios.get(`http://localhost:3000/api/like/${id.ID}`,config)
+            const res = await axios.get(`${apiUrl}/api/like/${id.ID}`,config)
             console.log(res.data)
             setpostLikes(res.data)
         } catch (error) {
@@ -53,7 +53,7 @@ useEffect(()=>{
         setLike(like? false:true)
         if(name==="addLike"){
             try {
-                const res = await axios.post("http://localhost:3000/api/like",{UserID, postID:id.ID},config)
+                const res = await axios.post(`${apiUrl}/api/like`,{UserID, postID:id.ID},config)
             dispatch(addlike(res.data))
             } catch (error) {
                 console.log(error)
@@ -62,7 +62,7 @@ useEffect(()=>{
         }else{
 
             try {
-                const res = await axios.delete(`http://localhost:3000/api/like/${likeID}`,config)
+                const res = await axios.delete(`${apiUrl}/api/like/${likeID}`,config)
                 dispatch(removelike())
             } catch (error) {
                 console.log(error)
@@ -74,7 +74,7 @@ useEffect(()=>{
     useEffect(()=>{
         const getPost = async ()=>{
             try {
-                const res = await axios.get(`http://localhost:3000/api/post/${id.ID}`)
+                const res = await axios.get(`${apiUrl}/api/post/${id.ID}`)
                 setPost(res.data)
             } catch (error) {
                 console.log(error)
@@ -86,7 +86,7 @@ useEffect(()=>{
     useEffect(()=>{
         const getComments = async ()=>{
             try {
-                const res = await axios.get(`http://localhost:3000/api/comment/${id.ID}`,config)
+                const res = await axios.get(`${apiUrl}/api/comment/${id.ID}`,config)
                 setComments(res.data)
                
             } catch (error) {
@@ -99,7 +99,7 @@ useEffect(()=>{
     const handleclick = async (e)=>{
        e.preventDefault()
        try {
-        const res = await axios.post("http://localhost:3000/api/comment", {UserID, postID:id.ID, comment:inputcomments}, config)
+        const res = await axios.post(`${apiUrl}/api/comment`, {UserID, postID:id.ID, comment:inputcomments}, config)
         setinputComments('')
         window.location.reload()
        } catch (error) {

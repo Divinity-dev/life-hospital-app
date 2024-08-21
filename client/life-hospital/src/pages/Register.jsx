@@ -11,7 +11,7 @@ const [user, setUser] = useState({
   password: ''
 })
 const dispatch= useDispatch()
-
+const apiUrl = process.env.REACT_APP_API_URL;
 const handlechange = (e)=>{
 const value = e.target.value;
 setUser({
@@ -23,7 +23,7 @@ setUser({
 const handleSubmit = async (e)=>{
 e.preventDefault()
 try {
-  const res = await axios.post("http://localhost:3000/api/auth/register", user)
+  const res = await axios.post(`${apiUrl}/api/auth/register`, user)
   dispatch(loginSuccess(res.data))
   setUser({
     username: '',

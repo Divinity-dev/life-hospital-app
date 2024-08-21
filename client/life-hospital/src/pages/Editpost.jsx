@@ -7,7 +7,7 @@ const Editpost = () => {
 const [Data, setData]= useState({})
 const [Image, setImage]= useState('')
 const navigate =useNavigate()
-
+const apiUrl = process.env.REACT_APP_API_URL;
 const {id}=useParams()
 const token =useSelector(state=>state.user.currentUser?.accessToken)
     const config = {
@@ -40,7 +40,7 @@ const handleImage=(e)=>{
 const formData = async (e)=>{
     e.preventDefault()
 try {
-    const res = await axios.put(`http://localhost:3000/api/post/${id}`,{...Data,Author:author, Image}, config)
+    const res = await axios.put(`${apiUrl}/api/post/${id}`,{...Data,Author:author, Image}, config)
     navigate('/postlist')
 } catch (error) {
     console.log(error)

@@ -7,7 +7,7 @@ const Postupdate = () => {
   const [formdata, setFormData]=useState({})
   const [Image, setImage]= useState('')
   const navigate = useNavigate()
-
+  const apiUrl = process.env.REACT_APP_API_URL;
   const handleImage = (e)=>{
     const file = e.target.files[0];
     const reader = new FileReader();
@@ -39,7 +39,7 @@ const Postupdate = () => {
 const formData = async (e)=>{
 e.preventDefault()
 try {
-    await axios.post("http://localhost:3000/api/post", {...formdata, Image, Author:author}, config)
+    await axios.post(`${apiUrl}/api/post`, {...formdata, Image, Author:author}, config)
   navigate("/postlist")
 } catch (error) {
   console.log(error)

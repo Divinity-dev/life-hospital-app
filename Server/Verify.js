@@ -18,7 +18,7 @@ const verifytokken = (req,res, next)=>{
 
 const Authorization = (req,res,next)=>{
   verifytokken(req,res,()=>{ 
-    if(req.user.id ===req.params.id || req.user.isAdmin){
+    if(req.user._id ===req.params.id || req.user.isAdmin){
         next()
     }else{
      

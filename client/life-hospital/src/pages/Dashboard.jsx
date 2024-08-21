@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { removebooking } from '../redux/bookingSlice'
 import { useDispatch } from 'react-redux'
+import {addBooking} from '../redux/bookingSlice'
+
 
 const Dashboard = () => {
     const [Image,setImage]=useState('')
-    const bookings = useSelector(state=>state.booking.Appointment)
+    const [books, setbooks]= useState([])
     const user = useSelector(state=>state.user.currentUser.user?.username)
     const token = useSelector(state=>state.user.currentUser?.accessToken)
-    const dispatch = useDispatch()
     const id =useSelector(state=>state.user.currentUser?.user._id)
     const handleImage = (e)=>{
         const file = e.target.files[0];
@@ -20,14 +21,31 @@ const Dashboard = () => {
         };
         reader.readAsDataURL(file);
       }
+      const apiUrl = process.env.REACT_APP_API_URL;
+  const dispatch = useDispatch()
+    
     const config ={
         headers:{
             Authorization:`Bearer ${token}`
         }
     }
+
+    useEffect(()=>{
+      const getBookings = async()=>{
+        try {
+          const res= await axios.get(`${apiUrl}/api/bookings`,config)
+          console.log(res.data)
+          setbooks(res.data)
+          dispatch(addBooking(res.data))
+        } catch (error) {
+          console.log(error)
+        }
+      }
+      getBookings()
+    },[ dispatch, token])
    const handleclick = async (id)=>{
     try {
-        await axios.delete(`http://localhost:3000/api/bookings/${id}`, config)
+        await axios.delete(`${apiUrl}/api/bookings/${id}`, config)
          dispatch(removebooking(id))
     } catch (error) {
         console.log(error)
@@ -36,7 +54,7 @@ const Dashboard = () => {
    const handleSubmit= async (e)=>{
     e.preventDefault()
        try {
-        const res = await axios.put(`http://localhost:3000/api/user/${id}`,{Image},config)
+        const res = await axios.put(`${apiUrl}/api/user/${id}`,{Image},config)
         console.log(res.data)
         
        } catch (error) {
@@ -62,7 +80,7 @@ const Dashboard = () => {
       </div>
        </div>
        {
-        bookings.map((item)=>(
+        books?.map((item)=>(
             <div key={item._id} className='bg-green-500 text-white font-bold flex justify-center items-center italic mb-4'>
                 <p>
                     You have an Appointment with life hospital on {formatDate(item.Date)}, at {item.Time}, over {item.purpose}.
