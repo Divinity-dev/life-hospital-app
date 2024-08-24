@@ -47,7 +47,7 @@ app.use("/api/bookings", BookingRouthe)
 app.use("/api/comment", Comments)
 
 
-app.listen(3000, ()=>{
-    console.log("Listening at post 3000")
+app.listen(process.env.Port ||3000, ()=>{
+    console.log(`Listening at post ${process.env.Port}`)
 })
 
