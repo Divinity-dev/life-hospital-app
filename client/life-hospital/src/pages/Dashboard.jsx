@@ -67,7 +67,7 @@ const Dashboard = () => {
     
     return `${formattedDate} `
 };
-
+console.log(books)
   return (
     <div className='p-4'>
         <div className='flex flex-col justify-center items-center '>
