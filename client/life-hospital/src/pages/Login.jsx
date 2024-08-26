@@ -35,7 +35,7 @@ const handleSubmit = async (e)=>{
       <h2 className='text-2xl font-bold mb-5'>SIGN IN</h2>
       <form action="" className='flex flex-col justify-center items-start mb-5' onSubmit={handleSubmit}>
         <input type="text" placeholder='username' className='w-full p-3 mb-5' name="username" onChange={handlechange}/>
-        <input type="text" placeholder='password' className='w-full p-3 mb-5 ' name="password" onChange={handlechange}/>
+        <input type="password" placeholder='password' className='w-full p-3 mb-5 ' name="password" onChange={handlechange}/>
         <button className='bg-green-950 p-2 text-white cursor-pointer w-40'>sign in </button>
       </form>
       <Link to="/register" className='text-white font-bold'>Create account</Link>
