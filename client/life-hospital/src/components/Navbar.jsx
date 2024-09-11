@@ -7,11 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const login = useSelector(state=>state.user.currentUser)
-  const Admin = useSelector(state=>state.user.currentUser?.user?.isAdmin)
-  const booking = useSelector(state=>state.booking.Appointment)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const currentUser = useSelector(state => state.user.currentUser);
+  const id = currentUser?.user._id
+  const login = currentUser?.user || null; 
+  const Admin = login?.isAdmin || false;    
+  const bookings = useSelector(state => state.booking.Appointment);
+  bookings.filter((book)=>book.UserID ===id)
+  const booking = login? bookings:0
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const logOut = ()=>{
   dispatch(logout())
@@ -46,7 +50,7 @@ const Navbar = () => {
             <li>Blog</li>
             </Link>
             <Link to={'./dashboard'}>
-            <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">{booking.length}</span></li>
+            <li className='relative'>Bookings<span className="ml-1 absolute bg-red-600 top-0 -right-2 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">{booking?.length}</span></li>
             </Link>
             
            {login? <li onClick={()=>{logOut()}} className='cursor-pointer'>signout</li> :<Link to={'./login'}> <li>login</li></Link>}

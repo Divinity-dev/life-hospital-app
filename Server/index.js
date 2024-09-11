@@ -10,19 +10,25 @@ import BookingRouthe from "./Routes/BookingRouthe.js"
 import Comments from "./Routes/Comments.js"
 import multer from 'multer';
 
+
 dotenv.config()
 mongoose.connect(process.env.Mongo_url).then(()=>{
     console.log("DB connected successfully")
 }).catch((err)=>{
     console.log(err)
 })
+
 const app = express();
+
+
+
 app.use(express.json({ limit: '50mb' }));
 app.use(cors())
 app.use(express.json())
 
-
-
+app.get('/', (req, res) => {
+    res.send('Backend is up and running!');
+});
 app.use("/api/auth", authRoute)
 app.use("/api/user", userRoute)
 app.use("/api/post", PostRoute)
@@ -31,7 +37,7 @@ app.use("/api/bookings", BookingRouthe)
 app.use("/api/comment", Comments)
 
 
-app.listen(3000, ()=>{
-    console.log("Listening at post 3000")
+app.listen(process.env.Port ||3000, ()=>{
+    console.log(`Listening at post ${process.env.Port}`)
 })
 

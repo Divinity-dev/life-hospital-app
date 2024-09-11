@@ -14,10 +14,11 @@ const Postlist = () => {
           Authorization:`Bearer ${token}`
       }
     }
+    const apiUrl = process.env.REACT_APP_API_URL;
     useEffect(()=>{
         const getPosts = async ()=>{
             try {
-                const res = await axios.get("http://localhost:3000/api/post")
+                const res = await axios.get(`${apiUrl}/api/post`)
             setPosts(res.data)
             } catch (error) {
                 console.log(error)
@@ -28,7 +29,7 @@ const Postlist = () => {
         },[])
         const handleClick= async (id)=>{
             try {
-              await axios.delete(`http://localhost:3000/api/post/${id}`,config)
+              await axios.delete(`${apiUrl}/api/post/${id}`,config)
               setPosts(posts.filter((user)=>user._id !== id))
             } catch (error) {
               console.log(error)

@@ -9,6 +9,7 @@ const Login = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
  const [user, setUser] = useState({})
+ const apiUrl = process.env.REACT_APP_API_URL;
  const handlechange = (e)=>{
   const value = e.target.value
   setUser(
@@ -19,7 +20,7 @@ const Login = () => {
 const handleSubmit = async (e)=>{
  e.preventDefault()
  try {
-  const res = await axios.post("http://localhost:3000/api/auth/login",user)
+  const res = await axios.post(`${apiUrl}/api/auth/login`,user)
  console.log(res.data)
   dispatch(loginSuccess(res.data))
   navigate("/")
@@ -34,7 +35,7 @@ const handleSubmit = async (e)=>{
       <h2 className='text-2xl font-bold mb-5'>SIGN IN</h2>
       <form action="" className='flex flex-col justify-center items-start mb-5' onSubmit={handleSubmit}>
         <input type="text" placeholder='username' className='w-full p-3 mb-5' name="username" onChange={handlechange}/>
-        <input type="text" placeholder='password' className='w-full p-3 mb-5 ' name="password" onChange={handlechange}/>
+        <input type="password" placeholder='password' className='w-full p-3 mb-5 ' name="password" onChange={handlechange}/>
         <button className='bg-green-950 p-2 text-white cursor-pointer w-40'>sign in </button>
       </form>
       <Link to="/register" className='text-white font-bold'>Create account</Link>

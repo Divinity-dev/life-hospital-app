@@ -1,6 +1,6 @@
 import Bookings from "../models/Bookings.js";
 import express from "express"
-import { Authorization } from "../Verify.js";
+import { Authorization, verifytokken } from "../Verify.js";
 
 const router = express.Router()
 
@@ -41,15 +41,15 @@ router.post('/', Authorization, async (req,res)=>{
 
 })
  //get all bookings
- router.get('/', Authorization, async(req,res)=>{
+ router.get('/',Authorization,  async (req, res) => {
     try {
-        const bookings = await Bookings.find()
-        res.status(200).json(bookings)
+        // Assuming `req.user` contains the user's ID after Authorization middleware
+        const bookings = await Bookings.find({ UserID: req.user.id}); 
+        res.status(200).json(bookings);
+        
     } catch (error) {
-        res.status(400).json(error)
+        res.status(400).json(error);
     }
-    
-
-  })  
+}); 
 
 export default router

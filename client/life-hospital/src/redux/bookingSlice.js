@@ -12,7 +12,8 @@ const bookinSlice = createSlice({
         removebooking:(state, action)=>{
             const id = action.payload; 
             state.Appointment = state.Appointment.filter(appointment => appointment._id !== id);
-        }
+        },
+        
     }
 })
 
