@@ -73,7 +73,7 @@ useEffect(()=>{
       
   }
   getPosts()
-  },[])
+  },[apiUrl])
 useEffect(()=>{
   const getComments = async ()=>{
       try {
@@ -85,7 +85,7 @@ useEffect(()=>{
       }
   }
   getComments()
-},[id,config])
+},[id,config,apiUrl])
 useEffect(()=>{
   const getLikes = async ()=>{
       try {
@@ -97,7 +97,7 @@ useEffect(()=>{
 
   }
   getLikes()
-},[id,config])
+},[id,config,apiUrl])
     const handleclick = async (e)=>{
       e.preventDefault()
       try {

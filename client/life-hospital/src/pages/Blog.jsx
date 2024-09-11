@@ -47,7 +47,7 @@ useEffect(()=>{
 
     }
     getLikes()
-},[id.ID, config])
+},[id.ID, config, apiUrl])
 
     const handleLikes = async (name)=>{
         setLike(like? false:true)
@@ -82,7 +82,7 @@ useEffect(()=>{
            
         }
         getPost()
-        },[id.ID])
+        },[id.ID, apiUrl])
     useEffect(()=>{
         const getComments = async ()=>{
             try {

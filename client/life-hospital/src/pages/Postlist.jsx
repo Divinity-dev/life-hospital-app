@@ -26,7 +26,7 @@ const Postlist = () => {
             
         }
         getPosts()
-        },[])
+        },[apiUrl])
         const handleClick= async (id)=>{
             try {
               await axios.delete(`${apiUrl}/api/post/${id}`,config)

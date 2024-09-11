@@ -44,7 +44,7 @@ const Users = () => {
             }
         }
         getUsers()
-    },[token])
+    },[token, apiUrl])
 
 const columns = [
   { field: '_id', headerName: 'ID', width: 250 },

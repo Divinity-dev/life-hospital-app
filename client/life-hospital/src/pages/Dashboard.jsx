@@ -42,7 +42,7 @@ const Dashboard = () => {
         }
       }
       getBookings()
-    },[ dispatch, token])
+    },[ dispatch, token,apiUrl])
    const handleclick = async (id)=>{
     try {
         await axios.delete(`${apiUrl}/api/bookings/${id}`, config)
