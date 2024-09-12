@@ -32,6 +32,10 @@
     left: 8px;
     transform: translateY(-50%);
   }
+
+  .gradient{
+     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(https://img.freepik.com/free-photo/health-still-life-with-copy-space_23-2148854034.jpg?t=st=1721809035~exp=1721812635~hmac=2bf7f91574c72d415705fcd241c0d5ea8976f072d81a2f79b694f9afa2aae6e3&w=1060);
+  }
   
   .placeholder:focus::placeholder {
     transform: translateY(0);

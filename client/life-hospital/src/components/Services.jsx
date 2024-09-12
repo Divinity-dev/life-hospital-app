@@ -73,9 +73,9 @@ const Services = () => {
         </div>
       </div>
     </div>
-    <div className='bg-[url(https://img.freepik.com/free-photo/health-still-life-with-copy-space_23-2148854034.jpg?t=st=1721809035~exp=1721812635~hmac=2bf7f91574c72d415705fcd241c0d5ea8976f072d81a2f79b694f9afa2aae6e3&w=1060)] object-cover  bg-cover bg-center bg-no-repeat bg-blend-overlay  from-black/100 to-black/100'>
-         <h2 className='flex justify-center items-center text-3xl text-yellow-800'>What makes us unique</h2>
-         <div className='flex flex-col md:grid grid-cols-2 text-yellow-800'>
+    <div className='gradient'>
+         <h2 className='flex justify-center items-center text-3xl text-white'>What makes us unique</h2>
+         <div className='flex flex-col md:grid grid-cols-2 text-white'>
           <div className='flex p-4 justify-center items-center'>
             <img src="https://www.svgrepo.com/show/384403/accept-check-good-mark-ok-tick.svg" alt="Good" className='w-14 h-14 border-1 rounded-full '/>
             <div className='flex flex-col'>
