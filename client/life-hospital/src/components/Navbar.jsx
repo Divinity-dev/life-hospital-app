@@ -43,6 +43,9 @@ const Navbar = () => {
             <Link to={'/about'}>
             <li>Services</li>
             </Link>
+            <Link to={'/Homeservive'}>
+            <li>Home services</li>
+            </Link>
             <Link to={'/about'}>
             <li>Contact Us</li>
             </Link>
@@ -69,7 +72,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {toggle && (
         <div className='md:hidden bg-black text-white'>
-          <ul className='flex flex-col space-y-2 p-4'>
+          <ul className='flex flex-col space-y-2 p-4 relative'>
             <Link to={'./'}>
             <li onClick={() => setToggle(false)}>Home</li>
             </Link>
@@ -80,13 +83,17 @@ const Navbar = () => {
             <li onClick={() => setToggle(false)}>Services</li>
             </Link>
             <Link>
+            <Link to={'/Homeservive'}>
+            <li onClick={() => setToggle(false)}>Home services</li>
+            </Link>
+            <Link></Link>
             <li onClick={() => setToggle(false)}>Contact Us</li>
             </Link>
             <Link to={'/blogposts'}>
             <li onClick={() => setToggle(false)}>Blog</li>
             </Link>
             <Link to={'./dashboard'}>
-            <li onClick={() => setToggle(false)}>Bookings<span className="ml-1">{booking.length}</span></li>
+            <li onClick={() => setToggle(false)}>Bookings<span className="ml-1 absolute bg-red-600 bottom-14 left-20 text-10 border-1 rounded-full h-3 w-3 flex justify-center items-center ">{booking.length}</span></li>
             </Link>
             <Link to={'./login'}>
             <li onClick={logOut } >{login? "signout":"Login/register"}</li>

@@ -17,6 +17,7 @@ import Postupdate from './pages/Postupdate.jsx';
 import Users from './pages/Users.jsx';
 import Postlist from './pages/Postlist.jsx';
 import Editpost from './pages/Editpost.jsx';
+import Homeservice from './pages/Homeservice.jsx';
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,7 @@ function App() {
         <Route path="/blogpost/:ID" element={< Blog/>}/>
         <Route path="/about" element={<About/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/Homeservive" element={<Homeservice/>}/>
         {Admin && <Route path="/postupdate" element={<Postupdate/>}/>}
         {Admin && <Route path="/users" element={<Users/>}/>}
         {Admin && <Route path="/postlist" element={<Postlist/>}/>}
