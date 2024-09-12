@@ -47,6 +47,7 @@ const Dashboard = () => {
     try {
         await axios.delete(`${apiUrl}/api/bookings/${id}`, config)
          dispatch(removebooking(id))
+         window.location.reload()
     } catch (error) {
         console.log(error)
     }

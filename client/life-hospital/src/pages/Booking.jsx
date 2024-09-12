@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
+import { addBooking } from '../redux/bookingSlice'
 
 const Booking = () => {
 const [details, setDetails] = useState({})
@@ -36,6 +37,7 @@ const formattedDetails = {
 try {
     const res = await axios.post(`${apiUrl}/api/bookings`,{...formattedDetails, UserID}, config)
     setDetails({});
+    dispatch(addBooking(res.data))
    window.location.reload();
 } catch (error) {
     console.log(error)
